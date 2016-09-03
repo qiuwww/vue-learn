@@ -18,6 +18,7 @@
 	<div id = "test">
 		<p>{{ testDetail }}</p>
 		<input type="text" v-model="testDetail"/>
+		<input type="text" value = "{{testDetail}}" />
 		<select v-model = "testDetail">
 			<option value="js" default>js</option>
 			<option value="html">html</option>
@@ -114,7 +115,7 @@
         </thead>
         <tbody>
             <tr v-for="person in people">
-                <td  @click="detail($index)">{{ person.name }}</td>
+                <td @click="detail($index)">{{ person.name }}</td>
                 <td>{{ person.age }}</td>
                 <td>{{ person.sex }}</td>
                 <!-- 这里的$index是对象的内置属性 -->
@@ -123,10 +124,81 @@
         </tbody>
     </table>
     </div>
+	<section id ="org_for">
+		<ol>
+			<li v-for = "knowledge in knowledges">
+				{{knowledge.text}}
+			</li>
+		</ol>
+	</section>
+	<section id = "org_on">
+		<p>{{message}}</p>
+		<button v-on:click="reverseMessage">Reverser Message</button>
+	</section>
 
+
+	<section id="org_complete">
+		<label>输入文本按enter键：</label>
+		<input v-model = "newTodo" v-on:keyup.enter = "addTodo"/>
+		<ul>
+			<li v-for = "todo in todos">
+				<span>{{todo.text}}</span>
+				<button v-on:click = "removeTodo($index)">X</button>  <!-- 访问父元素，使用属性 $index -->
+			</li>
+		</ul>
+	</section>
 </body>
-    <script src="vue/dist/vue.js"></script>
+<!-- <script src="vue/dist/vue.js"></script> -->
+	<script src = "vue_dev.js"></script>
     <script>
+    	// 就近原则,org
+    	
+    	var org_complete = new Vue({
+			el:'#org_complete',
+			data:{			//这里就像当于react中的react
+				newTodo:'',
+				todos:[
+					{ text:'Add some todos' }
+				]
+			},
+			methods:{
+				addTodo:function(){ //这里是使用构造函数生成的一个对象实例
+					var text = this.newTodo.trim();
+					if(text){
+						this.todos.push({ text:text })
+						this.newTodo = ''
+					}
+				},
+				removeTodo: function (index) {
+			      this.todos.splice(index, 1)//移除目标数组中的删除选项，借助于  $index
+			    }
+			}
+    	});
+    	 
+    	var org_on = new Vue({
+    		el:'#org_on',
+    		data:{
+    			message:'hello Vue.jsthis.messathis.messathis.messathis.messathis.messathis.messathis.messathis.messag'
+    		},
+    		methods:{
+    			reverseMessage:function(event){
+    				this.message = this.message.split('').reverse().join('');
+    				console.log(event);
+    			}
+    		}
+    	});
+
+    	var org_for = new Vue({
+    		el:'#org_for',
+    		data:{
+    			knowledges:[
+    			    { text: 'Learn JavaScript' },
+      				{ text: 'Learn Vue.js' },
+      				{ text: 'Build Something Awesome' }]
+    		}
+    	});
+
+
         // 这是我们的Model, 这里的model是一个全局的变量，可以在控制台上来控制里边的属性。
         var exampleData = {
             message: 'Hello World!',
@@ -267,6 +339,27 @@
                 	console.log(this);
                 }
             }
-        })
+        });
+//WHY?
+        // var extendVue = Vue.extend({
+        // 	created:function(str){
+        // 		console.log("this is a extend Vue Object!");
+        // 		console.log(str);
+        // 	}
+        	
+        // 	// data:{
+        // 	// 	atr:"sdfsdfd"
+        // 	// }
+        // });
+        // var myVueObject = new extendVue();
+
+        // console.log(myVueObject.atr);
+
+
+        // var textAttr = new Vue({
+
+        // });
+
+
     </script>
 </html>
