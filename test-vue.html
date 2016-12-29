@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>testVue</title>
+	<title>test-vue</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="testVue.css">
+	<link rel="stylesheet" href="test-vue.css">
 </head>
 
 <body>
+<!-- 起步 -->
     <!-- 声明式渲染 -->
-    <div id="app_declare">
-        {{ message }}
+    <div id="app-1">
+        {{ message }}  <!-- 输出Vue对象的值 -->
     </div>
-
-	<div id="app">
+    <hr>
+    <!-- v-model 双向绑定 -->
+	<div id="app-model">
 	    <p>{{ message }}</p>
 	    <h1>{{ message2 }}</h1>
-	    <input type="text" v-model="message"/>
-		<input type="text" v-model="message2"/>
+	    <input type="text" v-model="message">  <!-- 添加Vue的值 -->
+		<input type="text" v-model="message2">  <!-- Vue 也提供了 v-model 指令，它使得在表单输入和应用状态中做双向数据绑定变得非常轻巧。 -->
 	</div>
-
-	<div id = "test">
-		<p>{{ testDetail }}</p>
-		<input type="text" v-model="testDetail"/>
-		<input type="text" value = "{{testDetail}}" />
-		<select v-model = "testDetail">
-			<option value="js" default>js</option>
-			<option value="html">html</option>
-			<option value="css">css</option>
-		</select>
-	</div>
-	<!-- v-if -->
-	<div id = "_if">
+    <hr>
+    <!-- v-bind 添加标签属性-->
+    <div id="app-3">
+      <span v-bind:title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+    </div>
+    <hr>
+    <!-- v-if -->
+    <div id = "app-if">
         <h1 v-if="yes">Yes!</h1>
         <h1 v-if="no">No!</h1>
-        <h1 v-if="age >= 25">年龄大于等于25: {{ age }}</h1>
-        <h1 v-else>年龄小于25: {{ age }}</h1>
-        <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
-	</div>
-    <div id="_show">
-        <h1 v-show="yes">Yes!</h1>
-        <h1 v-show="no">No!</h1>
-        <h1 v-show="age >= 25">Age: {{ age }}</h1>
-        <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
-        <h1 v-show="sex == male">性别：{{sex}} </h1>
-        <p v-else>性别：{{sex}}</p> <!-- 标签不一样的时候与后边的一样 -->
-    </div>
 
-    <div id="_for">
+        <h1 v-if="age>=25">年龄大于等于25: {{ age }}</h1>
+        <h1 v-else>年龄小于25: {{ age }}</h1>
+
+        <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+    </div>
+    <hr>
+    <!-- v-for -->
+    <div id="app-for">
         <table>
             <thead> <!-- 表头 -->
                 <tr>
@@ -58,22 +52,15 @@
             <tbody>  <!-- 表格主体内容 -->
                 <tr v-for="person in people"> 
                     <td>{{ person.name  }}</td>
-                    <td>{{ person.age  }}</td>
-                    <td>{{ person.sex  }}</td>
+                    <td>{{ person.age   }}</td>
+                    <td>{{ person.sex   }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- 高亮当前页。添加属性 -->
-    <div id="_bind">
-        <ul class="pagination">
-            <li v-for="n in pageCount">
-                <a href="javascripit:void(0)" v-bind:class="activeNumber === n + 1 ? 'active' : ''">{{ n + 1 }}</a>
-            </li>
-        </ul>
-    </div>
-    <!-- 绑定事件 -->
-    <div id="_on">
+    <hr>
+    <!-- v-on 绑定事件 -->
+    <div id="app-on">
         <p><input type="text" v-model="message"></p>
         <p>
             <!--click事件直接绑定一个方法-->
@@ -84,6 +71,58 @@
             <button v-on:click="say('Hi')">Hi</button>
         </p>
     </div>
+    <hr>
+    <!-- component -->
+    <div id="app-component">
+      <ol>
+        <!-- Now we provide each todo-item with the todo object    -->
+        <!-- it's representing, so that its content can be dynamic -->
+        <!-- 组件的名称todo-item，直接插入页面 也就是替代了component中的li元素-->
+        <!-- 我们可以使用 v-bind 指令将 todo 传到每一个重复的组件中 -->
+        <!-- 与自定义元素类似，但是更好用 -->
+        <todo-item v-for="item in groceryList" v-bind:title="item.text" v-bind:todo="item"></todo-item>
+      </ol>
+    </div>
+    <hr>
+    <!-- filter -->
+    <ul id="filter">
+          <li v-for="product in products">
+               {{ product.name | capitalize }} - {{ product.price | discount 25 | currency }}
+          </li>
+    </ul>
+    <hr>
+
+
+	<div id = "test">
+		<p>{{ testDetail }}</p>
+		<input type="text" v-model="testDetail"/>
+		<input type="text" value = "{{testDetail}}" />
+		<select v-model = "testDetail">
+			<option value="js" default>js</option>
+			<option value="html">html</option>
+			<option value="css">css</option>
+		</select>
+	</div>
+
+    <div id="_show">
+        <h1 v-show="yes">Yes!</h1>
+        <h1 v-show="no">No!</h1>
+        <h1 v-show="age >= 25">Age: {{ age }}</h1>
+        <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+        <h1 v-show="sex == male">性别：{{sex}} </h1>
+        <p v-else>性别：{{sex}}</p> <!-- 标签不一样的时候与后边的一样 -->
+    </div>
+
+
+    <!-- 高亮当前页。添加属性 -->
+    <div id="_bind">
+        <ul class="pagination">
+            <li v-for="n in pageCount">
+                <a href="javascripit:void(0)" v-bind:class="activeNumber === n + 1 ? 'active' : ''">{{ n + 1 }}</a>
+            </li>
+        </ul>
+    </div>
+
     <!-- 综合案例 -->
 	<div id="_complete">
         <fieldset>
@@ -152,6 +191,6 @@
 		</ul>
 	</section>
 </body>
-	<script src = "vue_dev.js"></script>
-    <script src = "test_vue.js"></script>
+	<script src = "vue-dev.js"></script>
+    <script src = "test-vue.js"></script>
 </html>
