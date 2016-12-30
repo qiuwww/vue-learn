@@ -124,7 +124,97 @@ new Vue({
         }
     }
 });
-
+// computed
+var vm = new Vue({
+    el: '#computed',
+    data: {
+        message: 'Hello'
+    },
+    computed: {//表明属性是由计算得到的
+        // a computed getter
+        reversedMessage: function () {
+            // `this` points to the vm instance
+            return this.message.split('').reverse().join('')
+        }
+    },
+    // in component
+    methods: {// 计算属性是基于它的依赖缓存
+        reverseMessageMethods: function () {
+            return this.message.split('').reverse().join('')
+        }
+    }
+})
+// watched setter
+var vm_watch = new Vue({
+  el: '#watched',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+    fullName: 'Foo Bar'
+  },
+  watch: {
+    firstName: function (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+  },
+  computed: {
+        fullName2: {
+            // getter
+            get: function () {
+              return this.firstName + ' ' + this.lastName
+            },
+            // setter   vm_watch.fullName2 = 'John Doe'
+            set: function (newValue) { 
+              var names = newValue.split(' ')
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            }
+        }  
+    }
+})
+// v-show
+var vm_show = new Vue({
+    el: '#app-show',
+    data: {
+        yes: true,
+        no: false,
+        age: 28,
+        name: 'keepfool',
+        sex:'male'
+    }
+});
+// component
+var todo_list_complete = new Vue({
+    el:'#todo-list-complete',
+    data:{          //这里就像当于react中的react
+        newTodo:'',
+        todos:[
+            { text:'Add some todos' }
+        ]
+    },
+    methods:{
+        addTodo:function(){ //这里是使用构造函数生成的一个对象实例
+            var text = this.newTodo.trim();
+            if(text){
+                this.todos.push({ text:text })
+                this.newTodo = ''
+            }
+        },
+        removeTodo: function (index) {
+          this.todos.splice(index, 1)//移除目标数组中的删除选项，借助于  $index
+        }
+    }
+})
+// v-on add
+var example1 = new Vue({
+  el: '#on-add',
+  data: {
+    counter: 0
+  }
+})
 
 
 
@@ -153,28 +243,7 @@ new Vue({
 
 
 
-// 就近原则,org
-var org_complete = new Vue({
-	el:'#org_complete',
-	data:{			//这里就像当于react中的react
-		newTodo:'',
-		todos:[
-			{ text:'Add some todos' }
-		]
-	},
-	methods:{
-		addTodo:function(){ //这里是使用构造函数生成的一个对象实例
-			var text = this.newTodo.trim();
-			if(text){
-				this.todos.push({ text:text })
-				this.newTodo = ''
-			}
-		},
-		removeTodo: function (index) {
-	      this.todos.splice(index, 1)//移除目标数组中的删除选项，借助于  $index
-	    }
-	}
-});
+
  
 var org_on = new Vue({
 	el:'#org_on',
@@ -199,16 +268,7 @@ var org_on = new Vue({
 // 24
 // vm_if.age = 25
 // 25
-var vm_show = new Vue({
-    el: '#_show',
-    data: {
-        yes: true,
-        no: false,
-        age: 28,
-        name: 'keepfool',
-        sex:'male'
-    }
-});
+
 
 var vm_bind = new Vue({
     el: '#_bind',

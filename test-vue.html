@@ -91,6 +91,58 @@
           </li>
     </ul>
     <hr>
+    <!-- 计算属性 computed -->  
+    <div id="computed">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p><!-- 基于缓存的，因为如果一个需要复杂计算的属性，需要重用。这样就避免了多次计算的消耗 -->
+        <p>Reversed message: "{{ reverseMessageMethods() }}"</p><!-- 非缓存的，每次都要重新计算的 -->
+    </div>
+    <hr>
+    <!-- 计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ： -->
+    <!-- watched -->
+    <div id="watched">
+        <input type="text" v-model="firstName">
+        <input type="text" v-model="lastName">
+        <div>{{ fullName }}</div>
+        <div>{{ fullName2 }}</div>
+    </div>
+    <hr>
+    <!-- show -->
+    <div id="app-show">
+        <h1 v-show="yes">Yes!</h1>
+        <h1 v-show="no">No!</h1>
+        <h1 v-show="age >= 25">Age: {{ age }}</h1>
+        <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+        <h1 v-show="sex == male">性别：{{sex}} </h1>
+        <p v-else>性别：{{sex}}</p> <!-- 标签不一样的时候与后边的一样 -->
+    </div>
+    <hr>
+    <!-- component -->
+    <section id="todo-list-complete">
+        <label>输入文本按enter键：</label>
+        <input v-model = "newTodo" v-on:keyup.enter = "addTodo"/>
+        <ul>
+            <li v-for = "todo in todos">
+                <span>{{todo.text}}</span>
+                <button v-on:click = "removeTodo($index)">X</button>  <!-- 访问父元素，使用属性 $index -->
+            </li>
+        </ul>
+    </section>
+    <hr>
+    <!-- v-on add -->
+    <div id="on-add">
+      <button v-on:click="counter += 1">增加 1</button>
+      <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div>
+    <hr>
+
+
+
+
+
+
+
+
 
 
 	<div id = "test">
@@ -104,14 +156,7 @@
 		</select>
 	</div>
 
-    <div id="_show">
-        <h1 v-show="yes">Yes!</h1>
-        <h1 v-show="no">No!</h1>
-        <h1 v-show="age >= 25">Age: {{ age }}</h1>
-        <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
-        <h1 v-show="sex == male">性别：{{sex}} </h1>
-        <p v-else>性别：{{sex}}</p> <!-- 标签不一样的时候与后边的一样 -->
-    </div>
+
 
 
     <!-- 高亮当前页。添加属性 -->
@@ -180,16 +225,7 @@
 	</section>
 
 
-	<section id="org_complete">
-		<label>输入文本按enter键：</label>
-		<input v-model = "newTodo" v-on:keyup.enter = "addTodo"/>
-		<ul>
-			<li v-for = "todo in todos">
-				<span>{{todo.text}}</span>
-				<button v-on:click = "removeTodo($index)">X</button>  <!-- 访问父元素，使用属性 $index -->
-			</li>
-		</ul>
-	</section>
+
 </body>
 	<script src = "vue-dev.js"></script>
     <script src = "test-vue.js"></script>
