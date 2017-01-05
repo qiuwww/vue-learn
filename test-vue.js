@@ -215,6 +215,65 @@ var example1 = new Vue({
     counter: 0
   }
 })
+/**
+ * 组件
+ */
+// global-component
+// 注册
+Vue.component('global-component', {
+  template: '<div>A custom component! global-component used everywhere!</div>'
+})
+var childComponent = {
+  // 声明 props camelCase
+  props: ['myMessage'],  
+  template: '<div>{{myMessage}}A custom component! part-component! used under local scope!</div>'
+}
+// 创建根实例
+new Vue({
+  el: '#global-component',
+  components: {
+    // <my-component> 将只在父模板可用
+    'local-component': childComponent
+  }
+})
+// global-component
+new Vue({
+    el: "#global-component-c"
+});
+// 自定义事件
+Vue.component('button-counter', {
+  template: '<button v-on:click="increment">{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    increment: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
+
+
+
+
+
+
+
+
 
 
 

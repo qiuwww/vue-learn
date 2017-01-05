@@ -135,8 +135,23 @@
       <p>这个按钮被点击了 {{ counter }} 次。</p>
     </div>
     <hr>
-
-
+<!-- 组件部分 -->
+<!-- 全局注册的组件，全局可用 -->
+<div id="global-component">
+  <global-component></global-component>
+  <local-component v-bind:my-message="hello keyide"></local-component><!-- kebab-case 绑定父元素中的数据-->
+</div>
+<div id="global-component-c">
+    <global-component></global-component>
+</div>
+<hr>
+<!-- 自定义事件来传递子组件的数据到父组件 -->
+<div id="counter-event-example">
+  <p>{{ total }}</p>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<hr>
 
 
 
