@@ -1,4 +1,4 @@
-<!-- 主页面 || 入口文件-->
+<!-- 标准的vue组件，包含三个部分，一个是模板，一个是script，一个是样式 -->
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
@@ -20,7 +20,9 @@ export default {
   data: function () {
     return {
       title: 'this is a test of todoList',
-      items: [{label: '整个牛项目' }],
+      items: [{
+        label: '整个牛项目'
+      }],
       newItem: ''
     }
   },
