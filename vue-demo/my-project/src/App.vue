@@ -1,53 +1,80 @@
-<!-- 标准的vue组件，包含三个部分，一个是模板，一个是script，一个是样式 -->
+
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
-    <!-- components引用 -->
-    <!-- <router-view></router-view> -->
-    <h2>hello world</h2>
-    <h1 v-text = 'title'></h1>
-    <input v-model = 'newItem' v-on:keyup.enter='addNew'>
+    <h2>Simply todolist - vuejs</h2>
+    <!-- v-on: 可以简写为 @ ；v-bind: 可以简写为 ： ，动态地绑定一个或多个特性，或一个组件 prop 到表达式。-->
+    <!-- v-model ：在表单控件或者组件上创建双向绑定。 -->
+    <input id="add-input" v-model="todoText" @keyup.enter="addTodo" placeholder="do what?"/>
     <ul>
-        <li v-for='item in items' v-bind:class = '{finished: item.isFinished}' v-on:click = 'toggleFinish(item)'></li>
-        {{item.label}}      
+    <!-- (todoItem, index)，前一个参数元素，后一个参数是索引 -->
+      <todo v-for="(todoItem, index) in todoList" :todoItem="todoItem" :index="index"></todo>
     </ul>
   </div>
 </template>
 
 <script>
+import Todo from './components/todo'
 export default {
-  name: 'app',
-  data: function () {
+  // 只是一个名字，没有指定的话会有默认值。
+  // name只有作为组件选项时起作用。
+  // 允许组件模板递归地调用自身。注意，组件在全局用 Vue.component() 注册时，全局 ID 自动作为组件的 name。
+  name: 'todoList',
+  /**
+   * 组件（Component）是 Vue.js 最强大的功能之一。组件可以扩展 HTML 元素，封装可重用的代码。
+   * 在较高层面上，组件是自定义元素， Vue.js 的编译器为它添加特殊功能。
+   * 在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。
+   */
+  components: {
+    Todo
+  },
+  /**
+   * Vue 实例的数据对象。Vue 将会递归将 data 的属性转换为 getter/setter，
+   * 从而让 data 的属性能够响应数据变化。
+   * 对象必须是纯粹的对象(含有零个或多个的key/value对)：
+   * 浏览器 API 创建的原生对象，原型上的属性会被忽略。
+   */
+  data () {
     return {
-      title: 'this is a test of todoList',
-      items: [{
-        label: '整个牛项目'
-      }],
-      newItem: ''
+      todoText: ''
     }
   },
+  // 计算属性将被混入到 Vue 实例中。
+  // 所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
+  computed: {
+    // todoList : function(){return ...}
+    todoList () {
+      // 获取所有状态
+      return this.$store.getters.todos
+    }
+  },
+  // 事件注册
   methods: {
-    toggleFinish: function (item) {
-      item.isFinished = !item.isFinished
+    addTodo () {
+      this.$store.commit('addTodo', this.todoText)
+      this.todoText = ''
     },
-    addNew: function () {
-      this.items.push({
-        label: this.newItem,
-        isFinished: false
-      })
-      this.newItem = ''
+    deleteTodo (index) {
+      this.$store.commit('deleteTodo', index)
     }
   }
 }
 </script>
 
 <style>
+body {
+  font-family: Helvetica, sans-serif;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 800px;
+  margin: 30px auto;
+}
+#add-input {
+  width: 750px;
+  height: 35px;
+  padding: 0 5px;
+}
+ul {
+  list-style: none;
+  padding: 0;
 }
 </style>

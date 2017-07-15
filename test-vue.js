@@ -32,16 +32,7 @@ var app3 = new Vue({
   }
 })
 // 你再次打开浏览器的控制台输入 app2.message = 'some new message'，你就会再一次看到这个绑定了title属性的HTML已经进行了更新。
-// v-if指令
-var vm_if = new Vue({
-    el: '#app-if',
-    data: {
-        yes: true,
-        no: false,
-        age: 28,
-        name: 'keepfool'
-    }
-});
+
 // v-for
 var vm_for = new Vue({
     el: '#app-for',

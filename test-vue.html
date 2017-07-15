@@ -32,14 +32,11 @@
     <div id = "app-if">
         <h1 v-if="yes">Yes!</h1>
         <h1 v-if="no">No!</h1>
-
         <h1 v-if="age>=25">年龄大于等于25: {{ age }}</h1>
         <h1 v-else>年龄小于25: {{ age }}</h1>
-
         <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
     </div>
-    <hr>
-    <!-- v-for -->
+    <hr>    <!-- v-for -->
     <div id="app-for">
         <table>
             <thead> <!-- 表头 -->

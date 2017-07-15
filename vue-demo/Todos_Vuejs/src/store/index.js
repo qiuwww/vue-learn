@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import VueLocalStorage from 'vue-localstorage'
+// 这样之后就可以在Vue对象上调用VueLocalStorage对象了
 Vue.use(VueLocalStorage)
 
 const STORAGE_KEY = 'todos-vuejs'
