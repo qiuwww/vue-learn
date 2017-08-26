@@ -1,6 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-
+// 配置地址，以及一些操作
 module.exports = {
     build: {
         env: {

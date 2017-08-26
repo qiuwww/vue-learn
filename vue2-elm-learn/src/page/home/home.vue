@@ -57,6 +57,7 @@ export default {
 
 	mounted(){
         // 获取当前城市
+        // 突然发现的promise的优势，可以先获取，使用.then方法来添加回调
         cityGuess().then(res => {
             this.guessCity = res.name;
             this.guessCityid = res.id;

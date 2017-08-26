@@ -1,4 +1,9 @@
+
+// 项目入口文件
+
 import Vue from 'vue'
+// vuex 当你要把 vue-router 添加进来，我们需要做的是，
+// 将组件(components)映射到路由(routes)，然后告诉 vue-router 在哪里渲染它们。
 import VueRouter from 'vue-router'
 import routes from './router/router'
 import store from './store/'

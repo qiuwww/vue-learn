@@ -1,9 +1,15 @@
 var config = require('../config')
+// 设置node环境变量
+// process.env.NODE_ENV设置方式，1. 命令行添加；2. 运行的文件中设置
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+// A better node-open. Opens stuff like websites, files, executables. Cross-platform.
 var opn = require('opn')
+// Node.js proxying made simple. 
+// Configure proxy middleware with ease for connect, express, browser-sync and many more.
+// 代理中间件，可以替代匹配所有然后区分请求
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
@@ -22,7 +28,7 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
         chunks: false
     }
 })
-
+// webpack热启动中间件
 var hotMiddleware = require('webpack-hot-middleware')(compiler)
     // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function(compilation) {

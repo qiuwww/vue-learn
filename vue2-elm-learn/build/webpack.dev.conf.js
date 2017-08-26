@@ -9,7 +9,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 Object.keys(baseWebpackConfig.entry).forEach(function(name) {
     baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
-
+// webpack-merge provides a merge function 
+// that concatenates arrays and merges objects creating a new object. 
+// 扩展extend，Object.assign
 module.exports = merge(baseWebpackConfig, {
     module: {
         loaders: utils.styleLoaders({

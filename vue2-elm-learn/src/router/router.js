@@ -1,4 +1,22 @@
+
 import App from '../App'
+// vue-router 提供的导航钩子主要用来拦截导航，让它完成跳转或取消。
+// 有多种方式可以在路由导航发生时执行钩子：全局的, 单个路由独享的, 或者组件级的。
+/**
+ * router
+ * @param  {[home]}   [路由名称]
+ * @return {[r]}      [参数]
+ */
+
+// vue-router是Vue.js官方的路由插件，它和vue.js是深度集成的，适合用于构建单页面应用。
+// vue的单页面应用是基于路由和组件的，路由用于设定访问路径，并将路径和组件映射起来。
+// 传统的页面应用，是用一些超链接来实现页面切换和跳转的。
+// 在vue-router单页面应用中，则是路径之间的切换，也就是组件的切换。
+
+
+// require.ensure(dependencies: String[], callback: function(require), chunkName: String)
+// 得到一个组件，使用 require.ensure() 进行代码拆分。
+// r: router.redirect方法用于为路由器定义全局的重定向规则，全局的重定向会在匹配当前路径之前执行。
 
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
@@ -46,9 +64,9 @@ const questionDetail = r => require.ensure([], () => r(require('../page/service/
 const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 
-
-
-
+// 映射路由
+// $route.path 
+// 字符串，等于当前路由对象的路径，会被解析为绝对路径。
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -72,7 +90,10 @@ export default [{
         {
             path: '/msite',
             component: msite,
-            meta: { keepAlive: true },
+            meta: { 
+                // 保持不被销毁
+                keepAlive: true 
+            },
         },
         //特色商铺列表页
         {
@@ -88,7 +109,7 @@ export default [{
         {
             path: '/shop',
             component: shop,
-            children: [{
+            children: [{ // 三级路由
                 path: 'foodDetail', //食品详情页
                 component: foodDetail,
             }, {

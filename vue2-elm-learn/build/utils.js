@@ -1,5 +1,6 @@
 var path = require('path')
 var config = require('../config')
+// 用于提取css文件的webpack插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function(_path) {
