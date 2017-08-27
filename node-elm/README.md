@@ -254,3 +254,4 @@ npm run dev (需先开启mongodb)
 [GPL](https://github.com/bailicangdu/node-elm/blob/master/COPYING)
 
 
+C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Local\atom\bin;D:\Program Files (x86)\Fiddler2;c:\Program Files (x86)\Fiddler2;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\3.4\bin
