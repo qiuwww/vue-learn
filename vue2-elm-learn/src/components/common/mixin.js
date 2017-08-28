@@ -2,6 +2,8 @@ import { getStyle } from '../../config/mUtils'
 import { imgBaseUrl, localapi, proapi } from '../../config/env'
 
 export const loadMore = {
+	// 自定义指令，最好声明类型声明啊？
+	// 不能获取元素来操作了
 	directives: {
 		'load-more': {
 			bind: (el, binding) => {
@@ -23,7 +25,7 @@ export const loadMore = {
 					scrollEl = document.body;
 					heightEl = el;
 				}
-
+				// 绑定事件
 				el.addEventListener('touchstart', () => {
 					height = heightEl.clientHeight;
 					if (scrollType == 2) {
@@ -42,7 +44,7 @@ export const loadMore = {
 					oldScrollTop = scrollEl.scrollTop;
 					moveEnd();
 				}, false)
-
+				// 定义事件
 				const moveEnd = () => {
 					requestFram = requestAnimationFrame(() => {
 						if (scrollEl.scrollTop != oldScrollTop) {

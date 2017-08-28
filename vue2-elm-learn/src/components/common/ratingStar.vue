@@ -2,6 +2,7 @@
 	<div class="rating_container">
         <section class="star_container">
             <svg class="grey_fill" v-for="num in 5" :key="num">
+                <!-- use，通过xlink:href来使用定义好的组图吗 -->
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#star"></use>
             </svg>
         </section>

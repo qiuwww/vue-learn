@@ -23,6 +23,7 @@
       
         },
         props: ['alertText'],
+        // 子组件定义事件，父组件调用，可以用来传递数据
         methods: {
             closeTip(){
                 this.$emit('closeTip')

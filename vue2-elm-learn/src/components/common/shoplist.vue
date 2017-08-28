@@ -1,13 +1,18 @@
+
 <template>
 	<div class="shoplist_container">
+	    <!-- 自定义指令 -->
+	    <!-- 结果不为空，shopListArr.length为真的时候渲染 -->
 		<ul v-load-more="loaderMore" v-if="shopListArr.length" type="1">
+		<!-- tag = 'li' -->
 			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
 					<img :src="imgBaseUrl + item.image_path" class="shop_img">
 				</section>
+				<!-- <hgroup> 标签用于对网页或区段（section）的标题进行组合。 -->
 				<hgroup class="shop_right">
 					<header class="shop_detail_header">
-						<h4 :class="item.is_premium? 'premium': ''" class="" class="shop_title ellipsis">{{item.name}}</h4>
+						<h4 :class="item.is_premium ? 'premium': ''" class="shop_title ellipsis">{{item.name}}</h4>
 						<ul class="shop_detail_ul">
 							<li v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</li>
 						</ul>
@@ -15,6 +20,7 @@
 					<h5 class="rating_order_num">
 						<section class="rating_order_num_left">
 							<section class="rating_section">
+								<!-- 自定义标签，传递参数 -->
 								<rating-star :rating='item.rating'></rating-star>
 								<span class="rating_num">{{item.rating}}</span>
 							</section>
@@ -45,17 +51,22 @@
 				</hgroup>
 			</router-link>
 		</ul>
+		<!-- else的渲染，如，有结果和没结果的 -->
 		<ul v-else class="animation_opactiy">
+			<!-- 添加10次，item是1->10, key是0-9 -->
 			<li class="list_back_li" v-for="item in 10" :key="item">
 				<img src="../../images/shopback.svg" class="list_back_svg">
 			</li>
 		</ul>
+
 		<p v-if="touchend" class="empty_data">没有更多了</p>
+
 		<aside class="return_top" @click="backTop" v-if="showBackStatus">
 			<svg class="back_top_svg">
 				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
 			</svg>
 		</aside>
+		<!-- 引用svg？ -->
 		<div ref="abc" style="background-color: red;"></div>
 		<transition name="loading">
 			<loading v-show="showLoading"></loading>
@@ -92,7 +103,11 @@ export default {
 		loading,
 		ratingStar,
 	},
+	// 接受父组件传递的参数
 	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect', 'geohash'],
+	// 混合 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式。混合对象可以包含任意组件选项。以组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。
+	// loadMore是一个自定义指令，getImgPath拼接图片的地址
+	// 感觉就是import的原理一样，这里用于混为一个实例
 	mixins: [loadMore, getImgPath],
 	computed: {
 		...mapState([
@@ -100,11 +115,12 @@ export default {
 		]),
 	},
 	updated(){
-		// console.log(this.supportIds, this.sortByType)
+		console.log(this.supportIds, this.sortByType)
 	},
+	// 事件定义
 	methods: {
 		async initData(){
-			//获取数据
+			//获取数据，异步事件写的跟同步一样
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = [...res];
 			if (res.length < 20) {
@@ -134,6 +150,7 @@ export default {
 			this.hideLoading();
 			this.shopListArr = [...this.shopListArr, ...res];
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
+			//等于呢？最妥的方法是比较页码乘以页数，然后比较与total的大小
 			if (res.length < 20) {
 				this.touchend = true;
 				return
@@ -144,7 +161,8 @@ export default {
 		backTop(){
 			animate(document.body, {scrollTop: '0'}, 400,'ease-out');
 		},
-		//监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
+		// 监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
+		// props得到的数据不是的吗？
 		async listenPropChange(){
 			this.showLoading = true;
 			this.offset = 0;

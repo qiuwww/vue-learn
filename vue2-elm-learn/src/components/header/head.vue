@@ -1,9 +1,11 @@
 <template>
     <header id='head_top'>
+        <!-- 插槽 -->
         <slot name='logo'></slot>
         <slot name='search'></slot>
         <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <!-- polyline元素是SVG的一个基本形状，用来创建一系列直线连接多个点。典型的一个polyline是用来创建一个开放的形状，最后一点不与第一点相连。 -->
                 <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
             </svg>
         </section>
@@ -36,6 +38,7 @@
             this.getUserInfo();
 
         },
+        // 父元素传递,直接使用属性值,或者v-bind:绑定一个js对象
         props: ['signinUp', 'headTitle', 'goBack'],
         computed: {
             ...mapState([

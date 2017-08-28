@@ -1,5 +1,8 @@
- <template>
+
+<!-- 平衡？ -->
+<template>
   <div class="page">
+        <!-- 添加组件，并且传递参数 -->
         <head-top head-title="我的余额" go-back='true'></head-top>
         <section class="content_container">
             <section class="content">
@@ -7,6 +10,7 @@
                     <span class="content_title_style">当前余额</span>
                     <section class="contetn_description">
                         <img src="../../images/description.png" height="24" width="24">
+                        <!-- 点击跳转，被转化为一个a标签，跳转到自己的子路径内，如果到别的地方就是跳转 -->
                         <router-link to="/balance/detail" class="content_title_style">余额说明</router-link>
                     </section>
                 </header>
@@ -22,8 +26,12 @@
             <img src="../../images/no-log.png">
             <p>暂无明细记录</p>
         </div>
+        <!-- 组件，添加if来控制是否显示，最好使用v-show指令替代 -->
+        <!-- 绑定事件，添加参数 -->
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid" mode="out-in">
+        <!-- <router-view> 组件是一个 functional 组件，渲染路径匹配到的视图组件。<router-view> 渲染的组件还可以内嵌自己的 <router-view>，根据嵌套路径，渲染嵌套组件。
+        如下应该是存放alertTip的 -->
             <router-view></router-view>
         </transition>
     </div>
@@ -34,22 +42,26 @@
     import alertTip from 'src/components/common/alertTip'
     
     export default {
+      // 页面数据
       data(){
             return{
                 showAlert: false,
                 alertText: null,
             }
         },
+        // 生命周期，实例挂载到dom树中
         mounted(){
           
         },
         components: {
+            // 通过标签名关联到一起，head-top => headTop
             headTop,
             alertTip,
         },
         computed: {
            
         },
+        // 定义事件
         methods: {
             
         }

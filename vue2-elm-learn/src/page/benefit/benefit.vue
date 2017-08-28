@@ -1,16 +1,24 @@
- <template>
+
+
+<!-- 效益 -->
+<template>
   <div class="rating_page">
         <head-top head-title="我的优惠" go-back='true'></head-top>
+        <!-- 不showloading就显示如下 -->
         <section v-if="!showLoading">
             <section class="category_title"> 
+                <!-- 应该是点击之后，设置属性categoryType的值，然后带动设置class，样式被改变；也会改变后边的页面显示。 
+                不需要声明事件，改变实例的数据属性 -->
                 <span :class="{choosed: categoryType === 1}" @click="categoryType = 1">红包</span>
                 <span :class="{choosed: categoryType === 2}" @click="categoryType = 2">商家代金券</span>
             </section>
+            <!-- 红包 -->
             <transition name="router-fade">
                 <section v-if="categoryType === 1">
                     <section class="hongbao_container">
                         <header class="hongbao_title">
                             <section class="total_number">
+                                <!-- data内的数据可以直接饮用，不需要this -->
                                 有 <span>{{hongbaoList.length}}</span> 个红包即将到期
                             </section>
                             <section class="hongbao_description">
@@ -19,10 +27,12 @@
                             </section>
                         </header>
                         <ul class="hongbao_list_ul">
+                            <!-- v-for 默认行为试着不改变整体，而是替换元素。迫使其重新排序的元素,您需要提供一个 key 的特殊属性: -->
                             <li class="hongbao_list_li" v-for="item in hongbaoList" :key="item.id">
                                 <section class="list_item">
                                     <div class="list_item_left">
                                         <span>¥</span>
+                                        <!-- 直接可以使用js方法 -->
                                         <span>{{String(item.amount).split('.')[0]}}</span>
                                         <span>.</span>
                                         <span>{{String(item.amount).split('.')[1]||0}}</span>
@@ -41,9 +51,11 @@
                             </li>
                         </ul>
                     </section>
+                    <!-- a标签嵌套 -->
                     <router-link to="/benefit/hbHistory" class="history_hongbao">
                         <span class="check_history">查看历史红包</span>
                         <svg class="history_right">
+                        <!-- use元素在SVG文档内取得目标节点，并在别的地方复制它们。它的效果等同于这些节点被深克隆到一个不可见的DOM中，然后将其粘贴到use元素的位置，很像HTML5中的克隆模板元素。 -->
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
                     </router-link>
@@ -57,6 +69,7 @@
                     </footer>
                 </section>
             </transition>
+            <!-- 商家代金券 -->
             <transition name="router-fade">
                 <section v-if="categoryType === 2" class="voucher_container">
                     <section class="hongbao_description voucher_header">
@@ -90,6 +103,7 @@
     import loading from 'src/components/common/loading'
 
     export default {
+        // 本页面的基本配置，明确父组件与子组件是不同的Vue实例
       data(){
             return{
                 showAlert: false, //弹出框
@@ -97,18 +111,26 @@
                 showLoading: true, //加载动画
                 hongbaoList: null, //红包列表
                 categoryType: 1, //红包与商家代金券切换
-
             }
         },
+        // 已挂载，挂在之后调用初始化方法
         mounted(){
             this.initData();
         },
+        // 区分组件与路由跳转页面，组件是本页面的元素，跳转是要到下一个页面
         components: {
             headTop,
             alertTip,
             loading,
         },
+        // 计算属性
+        // mapState
+        // https://vuex.vuejs.org/zh-cn/state.html
+        // 当一个组件需要获取多个状态时候，将这些状态都声明为计算属性会有些重复和冗余。为了解决这个问题，我们可以使用 mapState 辅助函数帮助我们生成计算属性，让你少按几次键：
+        // mapState 函数返回的是一个对象。我们如何将它与局部计算属性混合使用呢？通常，我们需要使用一个工具函数将多个对象合并为一个，以使我们可以将最终对象传给 computed 属性。但是自从有了对象展开运算符（现处于 ECMASCript 提案 stage-3 阶段），我们可以极大地简化写法：
         computed: {
+            // 使用对象展开运算符将此对象混入到外部对象中
+            // mapState方法返回结果的展开
             ...mapState([
                 'userInfo',
             ]),
@@ -117,6 +139,7 @@
             ...mapMutations([
                 'CLEAR_CART'
             ]),
+            // 异步操作变为同步编程，数据操作，本质上还是异步请求，不过是改变了回调函数方式的编程
             async initData(){
                 if (this.userInfo) {
                     this.hongbaoList = await getHongbaoNum(this.userInfo.user_id);
@@ -124,6 +147,7 @@
                 }
             }
         },
+        // userInfo改变的时候，调用初始化函数
         watch: {
             userInfo: function (value){
                 this.initData();

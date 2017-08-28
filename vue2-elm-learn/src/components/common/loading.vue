@@ -1,8 +1,12 @@
- <template>
+
+
+<template>
 	<div class="loading_container">
+    <!-- 直接页面内添加style样式 -->
 	    <div class="load_img" :style="{backgroundPositionY: -(positionY%7)*2.5 + 'rem'}">
 	    </div>
     	<svg class="load_ellipse" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <!-- ellipse元素是一个SVG基本形状，用来创建一个椭圆，基于一个中心坐标以及它们的x半径和y半径。 -->
 			<ellipse cx="26" cy="10" rx="26" ry="10" style="fill:#ddd;stroke:none;"></ellipse>
 		</svg>
 	</div>

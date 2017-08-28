@@ -1,4 +1,6 @@
- <template>
+
+
+<template>
     <div class="page">
         <head-top head-title="余额问题" go-back='true'></head-top>
         <div class="markdown"><h3 id="q1-">Q1: 使用余额的条件</h3>
@@ -15,6 +17,7 @@
 
 <script>
     import headTop from 'src/components/header/head'
+    // 如下没有用到
     import {mapState, mapMutations} from 'vuex'
     import {payRequest} from 'src/service/getData'
     import alertTip from 'src/components/common/alertTip'

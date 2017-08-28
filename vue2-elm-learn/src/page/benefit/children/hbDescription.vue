@@ -61,7 +61,10 @@
             }
         },
         mounted(){
+            // 将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 Vue.nextTick 一样，不同的是回调的 this 自动绑定到调用它的实例上。
+            // DOM 还没有更新
             this.$nextTick(() => {
+                // DOM 现在更新了，为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) 。这样回调函数在 DOM 更新完成后就会调用。也就是一次数据变化之后不会着急去改变
                 new BScroll('#scroll_section', {  
                     deceleration: 0.001,
                     bounce: true,

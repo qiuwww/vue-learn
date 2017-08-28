@@ -2,6 +2,7 @@
   <div class="page">
         <head-top head-title="推荐有奖" go-back='true'></head-top>
         <section class="activity_banner">
+            <!-- 编译后会依据publicePath来拼接图片的地址 -->
             <img src="../../../images/activity.png">
         </section>
         <section class="invite_firend">
@@ -63,6 +64,7 @@
             ]),
         },
         methods: {
+            // 点击分享的时候，弹出弹框，给出提示
             fenxiang(){
                 this.showAlert = true;
                 this.alertText = '请在饿了么APP中打开';

@@ -1,4 +1,6 @@
- <template>
+
+
+<template>
     <div class="page">
         <span class="rem_time" style="color: orange;border-width: 1px;border-style: solid;border-color: orange;" @click="gotoPay">
 	       {{remaining}}
@@ -28,6 +30,7 @@
         },
         methods: {
             closeTip(){
+                // 子组件抛出一个事件，父组件来调用
                 this.$emit('closeTip')
             },
             //计算时间
