@@ -30,6 +30,7 @@
             </section>
             <section class="info-data">
                 <ul class="clear">
+                <!-- 声明tag -->
                     <router-link to="/balance" tag="li" class="info-data-link">
                         <span class="info-data-top"><b>{{parseInt(balance).toFixed(2)}}</b>元</span>
                         <span class="info-data-bottom">我的余额</span>

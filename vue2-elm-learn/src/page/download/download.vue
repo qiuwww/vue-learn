@@ -1,4 +1,5 @@
- <template>
+
+<template>
   <div class="download_page">
         <head-top head-title="下载" go-back='true'></head-top>
         <section class="dowload_container">
@@ -22,8 +23,7 @@
                 alertText: null,
             }
         },
-        created(){
-            //判断系统
+           //判断系统
             let u = navigator.userAgent;
             let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
             let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端

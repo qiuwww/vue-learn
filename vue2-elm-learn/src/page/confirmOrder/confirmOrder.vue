@@ -2,16 +2,18 @@
     <div class="confirmOrderContainer">
         <section v-if="!showLoading">
             <head-top head-title="确认订单" goBack="true" signin-up='confirmOrder'></head-top>
+            <!-- 查询字符串 -->
             <router-link :to='{path: "/confirmOrder/chooseAddress", query: {id: checkoutData.cart.id, sig: checkoutData.sig}}' class="address_container">
                 <div class="address_empty_left">
                     <svg class="location_icon">
+                        <!-- 使用定义好的图形 -->
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location"></use>
                     </svg>
                     <div class="add_address" v-if="!choosedAddress">请添加一个收获地址</div>
                     <div v-else class="address_detail_container">
                         <header>
                             <span>{{choosedAddress.name}}</span>
-                            <span>{{choosedAddress.sex == 1? '先生':'女士'}}</span>
+                            <span>{{choosedAddress.sex == 1 ? '先生':'女士'}}</span>
                             <span>{{choosedAddress.phone}}</span>
                         </header>
                         <div class="address_detail">
@@ -131,6 +133,7 @@
 </template>
 
 <script>
+
     import {mapState, mapMutations} from 'vuex'
     import headTop from 'src/components/header/head'
     import alertTip from 'src/components/common/alertTip'
@@ -153,8 +156,9 @@
                 alertText: null, //弹出框内容
             }
         },
+        // 实例创建完成
         created(){
-            //获取上个页面传递过来的geohash值
+            //获取上个页面传递过来的geohash值，通过router传递的参数
             this.geohash = this.$route.query.geohash;
             //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.shopId;
@@ -163,6 +167,7 @@
             //获取当前商铺购物车信息
             this.shopCart = this.cartList[this.shopId];
         },
+        // 实例挂载到dom树上
         mounted(){
             if (this.geohash) {
                 this.initData();
@@ -179,6 +184,7 @@
             loading,
         },
         computed: {
+            // mapState获取组件对应的state值, 获取对象属性然后展开为computed的值
             ...mapState([
                 'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
             ]),
@@ -205,8 +211,9 @@
             //初始化数据
             async initData(){
                 let newArr = new Array;
+                // Object.keys|Object.values
                 Object.values(this.shopCart).forEach(categoryItem => {
-                    Object.values(categoryItem).forEach(itemValue=> {
+                    Object.values(categoryItem).forEach(itemValue => {
                         Object.values(itemValue).forEach(item => {
                             newArr.push({
                                 attrs: [],

@@ -4,6 +4,7 @@
             <head-top head-title="搜索" go-back='true'></head-top>
             <form class="search_form">
                 <input type="search" name="search" placeholder="请输入小区/写字楼/学校等" v-model="searchValue">
+                <!-- 修饰符prevent -->
                 <button @click.prevent="searchPlace()">搜索</button>
             </form>
             <ul class="address_list" v-if="searchData">

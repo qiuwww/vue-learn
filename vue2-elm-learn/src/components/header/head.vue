@@ -46,6 +46,7 @@
             ]),
         },
         methods: {
+         // 异步获取用户信息
             ...mapActions([
                 'getUserInfo'
             ]),
@@ -56,6 +57,7 @@
 </script>
 
 <style lang="scss" scoped>
+/*当<style>标签具有作用域属性时，其CSS将仅适用于当前组件的元素。 这与Shadow DOM中的样式封装类似。*/
     @import '../../style/mixin';
 
     #head_top{

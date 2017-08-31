@@ -78,7 +78,7 @@ export default {
     	this.hasGetData = true;
     },
     mounted(){
-        //获取导航食品类型列表
+        // 获取导航食品类型列表，也就是fetch返回也是一个promise对象
        	msiteFoodTypes(this.geohash).then(res => {
        		let resLength = res.length;
        		let resArr = [...res]; // 返回一个新的数组

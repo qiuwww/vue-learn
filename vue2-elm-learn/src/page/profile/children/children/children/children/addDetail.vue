@@ -1,4 +1,6 @@
- <template>
+
+<!-- 多层嵌套，多次的下一级 -->
+<template>
   	<div class="rating_page">
         <head-top head-title="搜索地址" go-back='true'></head-top>
         <section>
