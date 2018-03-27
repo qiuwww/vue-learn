@@ -11,3 +11,20 @@
 1. 分块；
 2. 主文件内拼装，同时给出对应的js数据结构；
 3. 组件文件也可以再分块，有利于复用，数据和样式依附在视图文件内，层层组合；
+
+## vue的生命周期
+
+1.beforcreate
+2.created
+3.beformount
+4.mounted
+5.beforeUpdate
+6.updated
+7.actived
+8.deatived
+9.beforeDestroy
+10.destroyed
+
+还要具体研究每个过程的意义
+
+https://cn.vuejs.org/images/lifecycle.png
