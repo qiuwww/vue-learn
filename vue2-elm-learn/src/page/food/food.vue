@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="food_container">
     	<head-top :head-title="headTitle" goBack="true"></head-top>

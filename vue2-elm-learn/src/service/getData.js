@@ -1,6 +1,12 @@
 
+
+// 使用fetch来获取数据
+// Fetch 提供了对 Request 和 Response （以及其他与网络请求有关的）对象的通用定义。
+// 使之今后可以被使用到更多地应用场景中：无论是service workers、Cache API、
+// 又或者是其他处理请求和响应的方式，甚至是任何一种需要你自己在程序中生成响应的方式。
 // fetch
 import fetch from '../config/fetch'
+// 共享方法调用
 import {getStore} from '../config/mUtils'
 
 /**

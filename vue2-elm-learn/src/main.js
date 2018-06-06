@@ -26,7 +26,8 @@ if ('addEventListener' in document) {
         FastClick.attach(document.body);
     }, false);
 }
-// 使用模块处理
+
+// 路由处理
 Vue.use(VueRouter)
 // 一个 route object（路由信息对象） 表示当前激活的路由的状态信息，
 // 包含了当前 URL 解析得到的信息，还有 URL 匹配到的 route records（路由记录）。
@@ -52,6 +53,7 @@ const router = new VueRouter({
 
 new Vue({
 	router,
+	// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件，这里配合Vue.use(Vuex)；同理对于vue-router
 	store,
 }).$mount('#app')
 

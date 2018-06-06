@@ -1,3 +1,6 @@
+
+// 更改Vuex的store中的状态的唯一方法就是mutations。
+// 每一个mutation都有一个事件类型type和一个回调函数handler。
 import {
 	RECORD_ADDRESS,
 	ADD_CART,
@@ -34,12 +37,30 @@ import {setStore, getStore} from '../config/mUtils'
 
 import {localapi, proapi} from 'src/config/env'
 
+
+// // mutation-types.js
+// export const SOME_MUTATION = 'SOME_MUTATION'
+// // store.js
+// import Vuex from 'vuex'
+// import { SOME_MUTATION } from './mutation-types'
+
+// const store = new Vuex.Store({
+//   state: { ... },
+//   mutations: {
+//     // 我们可以使用 ES2015 风格的计算属性命名功能来使用一个常量作为函数名
+//     [SOME_MUTATION] (state) {
+//       // mutate state
+//     }
+//   }
+// })
+
+// https://vuex.vuejs.org/zh-cn/mutations.html
 export default {
 	// 记录当前经度纬度
-	[RECORD_ADDRESS](state, {
+	[RECORD_ADDRESS](state, { // 参数
 		latitude,
 		longitude
-	}) {
+	}) {// 函数体，回调函数，也即需要改变的store值
 		state.latitude = latitude;
 		state.longitude = longitude;
 	},

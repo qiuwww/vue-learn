@@ -4,7 +4,10 @@ import mutations from './mutations'
 import actions from './action'
 import getters from './getters'
 
+// 使用模块处理, 将状态从根组件注入到每一个子组件中。
+// 通过这种注入机制，就能在子组件Counter通过this.$store访问：
 Vue.use(Vuex)
+// 整个应用的状态保存对象
 
 const state = {
 	latitude: '', // 当前位置纬度
@@ -38,6 +41,6 @@ const state = {
 export default new Vuex.Store({
 	state,
 	getters,
-	actions,
-	mutations,
+	actions,// 动作
+	mutations,// 变化
 })
