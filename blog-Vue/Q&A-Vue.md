@@ -769,7 +769,7 @@ import home from "../../common/home.vue";
 const home = r => require.ensure([], () => r(require("../common/home.vue")));
 ```
 
-## Vue相关问题
+## Vue 相关问题
 
 ### 1.对于 MVVM 的理解
 
@@ -885,3 +885,14 @@ next：function 一定要调用该方法 resolve 这个钩子。执行效果依�
 5. slot
 6. props
 7. watch
+
+## Vue 组件间通信六种方式
+
+vue 组件间通信的几种方式，如
+
+- props、传值，传事件
+- $emit/$on，触发事件与监听事件
+- vuex、，全局状态管理
+- $parent/$children、直接拿到组件的引用
+- $attrs/$listeners
+- provide/inject
