@@ -104,7 +104,7 @@ MVVM 支持双向绑定，意思就是当**M 层数据**进行修改时，VM 层
 ```js
 // 没有get和set
 let obj = {};
-Object.defineProperty(obj, "a", {
+Object.defineProperty(obj, 'a', {
   value: 123, // 该属性值为123
   enumerable: false, // 不可被遍历得到
   writable: false, // 不可被重新写入
@@ -117,16 +117,16 @@ let obj = {
     a: 123
   }
 };
-Object.defineProperty(obj, "a", {
+Object.defineProperty(obj, 'a', {
   get() {
     // 当获取a时执行
-    console.log("a被获取了");
+    console.log('a被获取了');
     return obj._data.a;
   },
   set(value) {
     // 当修改a时执行
     obj._data.a = value;
-    console.log("a的值被修改了");
+    console.log('a的值被修改了');
   }
 });
 ```
@@ -340,7 +340,7 @@ mounted() {
 </script>
 <!-- Child.vue -->
 <script>
-  this.$emit("refreshList");
+  this.$emit('refreshList');
 </script>
 ```
 
@@ -477,11 +477,11 @@ bind: function (el, binding, vnode) {
 #### 1、需要入口文件定义安装对象 index.js
 
 ```js
-import MyLoading from "./Loading.vue";
+import MyLoading from './Loading.vue';
 // 这里是重点
 const Loading = {
   install: function(Vue) {
-    Vue.component("Loading", MyLoading);
+    Vue.component('Loading', MyLoading);
   }
 };
 // 导出组件
@@ -574,11 +574,11 @@ router.beforeEach((to, from, next) => {
 一般用在自定义事件，比如父组件传递过来的事件。
 
 ```js
-vm.$on("test", function(msg) {
+vm.$on('test', function(msg) {
   console.log(msg);
 });
 // 用于触发当前组件的时间，或者父实例定义的事件（回调）
-vm.$emit("test", "hi");
+vm.$emit('test', 'hi');
 // => "hi"
 ```
 
@@ -686,7 +686,7 @@ ref 被用来给元素或子组件注册引用信息。引用信息将会注册�
 </div>
 <script>
   new Vue({
-    el: "#demo",
+    el: '#demo',
     data: {
       oldNum: 0
     },
@@ -696,7 +696,7 @@ ref 被用来给元素或子组件注册引用信息。引用信息将会注册�
           return this.oldNum;
         },
         set: function(newValue) {
-          this.oldNum = newValue.replace(/[^\d]/g, "");
+          this.oldNum = newValue.replace(/[^\d]/g, '');
         }
       }
     }
@@ -744,15 +744,15 @@ this.val=e.target.value.replace(/[^\d]/g,''); }
   placeholder="请输入借款金额"
 />
 <script>
-  Vue.directive("numberOnly", {
+  Vue.directive('numberOnly', {
     bind: function(el) {
       el.handler = function() {
-        el.value = el.value.replace(/[^\d]/g, "");
+        el.value = el.value.replace(/[^\d]/g, '');
       };
-      el.addEventListener("input", el.handler);
+      el.addEventListener('input', el.handler);
     },
     unbind: function(el) {
-      el.removeEventListener("input", el.handler);
+      el.removeEventListener('input', el.handler);
     }
   });
 </script>
@@ -764,9 +764,9 @@ webpack 中提供了 `require.ensure()`来实现按需加载。以前引入路�
 
 ```js
 // 不进行页面按需加载引入方式：
-import home from "../../common/home.vue";
+import home from '../../common/home.vue';
 // 进行页面按需加载的引入方式：
-const home = r => require.ensure([], () => r(require("../common/home.vue")));
+const home = r => require.ensure([], () => r(require('../common/home.vue')));
 ```
 
 ## Vue 相关问题
@@ -804,17 +804,17 @@ vue 实现数据双向绑定主要是：采用数据劫持结合发布者-订阅
 </body>
 <script type="text/javascript">
   var obj = {};
-  Object.defineProperty(obj, "txt", {
+  Object.defineProperty(obj, 'txt', {
     get: function() {
       return obj;
     },
     set: function(newValue) {
-      document.getElementById("txt").value = newValue;
-      document.getElementById("show").innerHTML = newValue;
+      document.getElementById('txt').value = newValue;
+      document.getElementById('show').innerHTML = newValue;
     }
   });
 
-  document.addEventListener("keyup", function(e) {
+  document.addEventListener('keyup', function(e) {
     obj.txt = e.target.value;
   });
 </script>
@@ -896,3 +896,77 @@ vue 组件间通信的几种方式，如
 - $parent/$children、直接拿到组件的引用
 - $attrs/$listeners
 - provide/inject
+
+## 常见面试题
+
+### MVVM
+
+MVVM（Model-View-ViewModel）模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。
+
+- View， template
+- Model， data 的返回
+- ViewModel， 是 vue 实例，整个的控制器
+
+### 生命周期
+
+- 创建前/后： 在**beforeCreate**阶段，vue 实例的挂载元素 el 和数据对象 data 都为 undefined，还未初始化。在**created**阶段，vue 实例的数据对象 data 有了，el 还没有。
+- 载入前/后：在**beforeMount**阶段，vue 实例的\$el 和 data 都初始化了，但还是挂载之前为虚拟的 dom 节点，data.message 还未替换。在**mounted**阶段，vue 实例挂载完成，data.message 成功渲染。
+- 更新前/后：当 data 变化时，会触发**beforeUpdate**和**updated**方法。
+- 销毁前/后：**beforeDestroy**实例销毁之前调用。在这一步，实例仍然完全可用。**destroyed**，Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+
+- beforeCreate
+- created
+- beforeMount
+- mounted，mounted，数据请求，修改 dom，修改 data 都可以进行了
+- beforeUpdate
+- updated
+- beforeDestory
+- destoryed
+
+### 实例常用属性
+
+```js
+export default {
+data: function () {
+  return { a: 1 }
+},
+// 要明确接受的props
+props: ['size', 'myMessage'],
+computed: {
+  // 仅读取
+  aDouble: function () {
+    return this.a * 2
+  },
+  // 读取和设置
+  aPlus: {
+    get: function () {
+      return this.a + 1
+    },
+    set: function (v) {
+      this.a = v - 1
+    }
+  }
+},
+methods: {
+  plus: function () {
+    this.a++
+  }
+},
+watch: {
+  a: function (val, oldVal) {
+    console.log('new: %s, old: %s', val, oldVal)
+  },
+}
+```
+
+### 指令,template 标签属性
+
+v-text
+v-if
+v-html
+v-show
+v-else
+v-else-if
+v-on @
+v-bind :
+v-model
