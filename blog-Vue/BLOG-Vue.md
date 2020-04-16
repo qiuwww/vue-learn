@@ -1,4 +1,12 @@
-# Vue 相关问题
+---
+title: Vue
+date: 2017-6-6
+tags:
+  - Vue
+categories:
+  - Vue
+  - 前端框架
+---
 
 [TOC]
 
@@ -108,14 +116,14 @@ Object.defineProperty(obj, 'a', {
   value: 123, // 该属性值为123
   enumerable: false, // 不可被遍历得到
   writable: false, // 不可被重新写入
-  configurable: false // 不可被删除，且enumerable和value不能通过Object.defineProperty重新定义
+  configurable: false, // 不可被删除，且enumerable和value不能通过Object.defineProperty重新定义
 });
 // 使用get和set
 let obj = {
   // 设定默认值
   _data: {
-    a: 123
-  }
+    a: 123,
+  },
 };
 Object.defineProperty(obj, 'a', {
   get() {
@@ -127,7 +135,7 @@ Object.defineProperty(obj, 'a', {
     // 当修改a时执行
     obj._data.a = value;
     console.log('a的值被修改了');
-  }
+  },
 });
 ```
 
@@ -236,7 +244,7 @@ Vue.config.keyCodes.f1 = 112;
 <transition>
   <span :key="text">{{ text }}</span>
 </transition>
-// 当 text 发生改变时，<span> 会随时被更新，因此会触发过渡。
+// 当 text 发生改变时，<span> 会随时被更新，因此会触发过渡。</span>
 ```
 
 ### diff 算法
@@ -328,14 +336,14 @@ mounted() {
       return {};
     },
     components: {
-      Child
+      Child,
     },
     mounted() {},
     methods: {
-      onRefresList() {}
+      onRefresList() {},
     },
     computed: {},
-    watch: {}
+    watch: {},
   };
 </script>
 <!-- Child.vue -->
@@ -480,9 +488,9 @@ bind: function (el, binding, vnode) {
 import MyLoading from './Loading.vue';
 // 这里是重点
 const Loading = {
-  install: function(Vue) {
+  install: function (Vue) {
     Vue.component('Loading', MyLoading);
-  }
+  },
 };
 // 导出组件
 export default Loading;
@@ -574,7 +582,7 @@ router.beforeEach((to, from, next) => {
 一般用在自定义事件，比如父组件传递过来的事件。
 
 ```js
-vm.$on('test', function(msg) {
+vm.$on('test', function (msg) {
   console.log(msg);
 });
 // 用于触发当前组件的时间，或者父实例定义的事件（回调）
@@ -688,18 +696,18 @@ ref 被用来给元素或子组件注册引用信息。引用信息将会注册�
   new Vue({
     el: '#demo',
     data: {
-      oldNum: 0
+      oldNum: 0,
     },
     computed: {
       inpNum: {
-        get: function() {
+        get: function () {
           return this.oldNum;
         },
-        set: function(newValue) {
+        set: function (newValue) {
           this.oldNum = newValue.replace(/[^\d]/g, '');
-        }
-      }
-    }
+        },
+      },
+    },
   });
 </script>
 ```
@@ -745,15 +753,15 @@ this.val=e.target.value.replace(/[^\d]/g,''); }
 />
 <script>
   Vue.directive('numberOnly', {
-    bind: function(el) {
-      el.handler = function() {
+    bind: function (el) {
+      el.handler = function () {
         el.value = el.value.replace(/[^\d]/g, '');
       };
       el.addEventListener('input', el.handler);
     },
-    unbind: function(el) {
+    unbind: function (el) {
       el.removeEventListener('input', el.handler);
-    }
+    },
   });
 </script>
 ```
@@ -766,7 +774,7 @@ webpack 中提供了 `require.ensure()`来实现按需加载。以前引入路�
 // 不进行页面按需加载引入方式：
 import home from '../../common/home.vue';
 // 进行页面按需加载的引入方式：
-const home = r => require.ensure([], () => r(require('../common/home.vue')));
+const home = (r) => require.ensure([], () => r(require('../common/home.vue')));
 ```
 
 ## Vue 相关问题
@@ -805,16 +813,16 @@ vue 实现数据双向绑定主要是：采用数据劫持结合发布者-订阅
 <script type="text/javascript">
   var obj = {};
   Object.defineProperty(obj, 'txt', {
-    get: function() {
+    get: function () {
       return obj;
     },
-    set: function(newValue) {
+    set: function (newValue) {
       document.getElementById('txt').value = newValue;
       document.getElementById('show').innerHTML = newValue;
-    }
+    },
   });
 
-  document.addEventListener('keyup', function(e) {
+  document.addEventListener('keyup', function (e) {
     obj.txt = e.target.value;
   });
 </script>
