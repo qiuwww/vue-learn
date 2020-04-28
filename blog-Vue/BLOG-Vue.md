@@ -14,7 +14,7 @@ categories:
 
 ## Vue 相关的基础问题
 
-### vue 的优点是什么？
+### Vue 的优点是什么
 
 - 低耦合。视图（View）可以独立于 Model 变化和修改，一个 ViewModel 可以绑定到不同的"View"上，当 View 变化的时候 Model 可以不变，当 Model 变化的时候 View 也可以不变。
 - 可重用性。你可以把一些视图逻辑放在一个 ViewModel 里面，让很多 view 重用这段视图逻辑。
@@ -978,3 +978,9 @@ v-else-if
 v-on @
 v-bind :
 v-model
+
+### Vue 的 data，为什么是一个函数
+
+就是一个原型上属性与方法的区别。
+
+如果是一个属性，大家都可以修改了，如果是一个方法，那就各用各的。
