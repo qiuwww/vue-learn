@@ -1,9 +1,17 @@
 # vue-learn
 
-主要是学习代码与总结
+主要是学习代码与总结。
 
 [官方文档地址](https://cn.vuejs.org/v2/guide/#%E8%B5%B7%E6%AD%A5)
 
-## 新建项目
+## blog-vue
 
-[参考文档地址](https://cli.vuejs.org/zh/guide/)
+vue 学习笔记，保存的资料，**温故而知新**。
+
+## vue-features-test
+
+vue 功能测试，基本 demo。
+
+1. ts
+2. vuex
+3. vue-router

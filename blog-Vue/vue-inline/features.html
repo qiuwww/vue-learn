@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test-vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="test-vue.css" />
+  </head>
+
+  <body>
+    <!-- 起步 -->
+    <!-- 声明式渲染 -->
+    <div id="app-1">
+      {{ message }}
+      <!-- 输出Vue对象的值 -->
+    </div>
+    <hr />
+    <!-- v-model 双向绑定 -->
+    <div id="app-model">
+      <p>{{ message }}</p>
+      <h1>{{ message2 }}</h1>
+      <input type="text" v-model="message" />
+      <!-- 添加Vue的值 -->
+      <input type="text" v-model="message2" />
+      <!-- Vue 也提供了 v-model 指令，它使得在表单输入和应用状态中做双向数据绑定变得非常轻巧。 -->
+    </div>
+    <hr />
+    <!-- v-bind 添加标签属性-->
+    <div id="app-3">
+      <span v-bind:title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound
+        title!
+      </span>
+    </div>
+    <hr />
+    <!-- v-if -->
+    <div id="app-if">
+      <h1 v-if="yes">Yes!</h1>
+      <h1 v-if="no">No!</h1>
+      <h1 v-if="age>=25">年龄大于等于25: {{ age }}</h1>
+      <h1 v-else>年龄小于25: {{ age }}</h1>
+      <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+    </div>
+    <hr />
+    <!-- v-for -->
+    <div id="app-for">
+      <table>
+        <thead>
+          <!-- 表头 -->
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 表格主体内容 -->
+          <tr v-for="person in people">
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.sex }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <!-- v-on 绑定事件 -->
+    <div id="app-on">
+      <p><input type="text" v-model="message" /></p>
+      <p>
+        <!--click事件直接绑定一个方法-->
+        <button v-on:click="greet">Greet</button>
+      </p>
+      <p>
+        <!--click事件使用内联语句-->
+        <button v-on:click="say('Hi')">Hi</button>
+      </p>
+    </div>
+    <hr />
+    <!-- component -->
+    <div id="app-component">
+      <ol>
+        <!-- Now we provide each todo-item with the todo object    -->
+        <!-- it's representing, so that its content can be dynamic -->
+        <!-- 组件的名称todo-item，直接插入页面 也就是替代了component中的li元素-->
+        <!-- 我们可以使用 v-bind 指令将 todo 传到每一个重复的组件中 -->
+        <!-- 与自定义元素类似，但是更好用 -->
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:title="item.text"
+          v-bind:todo="item"
+        ></todo-item>
+      </ol>
+    </div>
+    <hr />
+    <!-- filter -->
+    <ul id="filter">
+      <li v-for="product in products">
+        {{ product.name | capitalize }} - {{ product.price | discount 25 |
+        currency }}
+      </li>
+    </ul>
+    <hr />
+    <!-- 计算属性 computed -->
+    <div id="computed">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+      <!-- 基于缓存的，因为如果一个需要复杂计算的属性，需要重用。这样就避免了多次计算的消耗 -->
+      <p>Reversed message: "{{ reverseMessageMethods() }}"</p>
+      <!-- 非缓存的，每次都要重新计算的 -->
+    </div>
+    <hr />
+    <!-- 计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter ： -->
+    <!-- watched -->
+    <div id="watched">
+      <input type="text" v-model="firstName" />
+      <input type="text" v-model="lastName" />
+      <div>{{ fullName }}</div>
+      <div>{{ fullName2 }}</div>
+    </div>
+    <hr />
+    <!-- show -->
+    <div id="app-show">
+      <h1 v-show="yes">Yes!</h1>
+      <h1 v-show="no">No!</h1>
+      <h1 v-show="age >= 25">Age: {{ age }}</h1>
+      <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+      <h1 v-show="sex == male">性别：{{sex}}</h1>
+      <p v-else>性别：{{sex}}</p>
+      <!-- 标签不一样的时候与后边的一样 -->
+    </div>
+    <hr />
+    <!-- component -->
+    <section id="todo-list-complete">
+      <label>输入文本按enter键：</label>
+      <input v-model="newTodo" v-on:keyup.enter="addTodo" />
+      <ul>
+        <li v-for="todo in todos">
+          <span>{{todo.text}}</span>
+          <button v-on:click="removeTodo($index)">X</button>
+          <!-- 访问父元素，使用属性 $index -->
+        </li>
+      </ul>
+    </section>
+    <hr />
+    <!-- v-on add -->
+    <div id="on-add">
+      <button v-on:click="counter += 1">增加 1</button>
+      <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div>
+    <hr />
+    <!-- 组件部分 -->
+    <!-- 全局注册的组件，全局可用 -->
+    <div id="global-component">
+      <global-component></global-component>
+      <local-component v-bind:my-message="hello keyide"></local-component
+      ><!-- kebab-case 绑定父元素中的数据-->
+    </div>
+    <div id="global-component-c">
+      <global-component></global-component>
+    </div>
+    <hr />
+    <!-- 自定义事件来传递子组件的数据到父组件 -->
+    <div id="counter-event-example">
+      <p>{{ total }}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+    <hr />
+
+    <div id="test">
+      <p>{{ testDetail }}</p>
+      <input type="text" v-model="testDetail" />
+      <input type="text" value="{{testDetail}}" />
+      <select v-model="testDetail">
+        <option value="js" default>js</option>
+        <option value="html">html</option>
+        <option value="css">css</option>
+      </select>
+    </div>
+
+    <!-- 高亮当前页。添加属性 -->
+    <div id="_bind">
+      <ul class="pagination">
+        <li v-for="n in pageCount">
+          <a
+            href="javascripit:void(0)"
+            v-bind:class="activeNumber === n + 1 ? 'active' : ''"
+            >{{ n + 1 }}</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- 综合案例 -->
+    <div id="_complete">
+      <fieldset>
+        <legend>Create New Person</legend>
+        <div class="form-group">
+          <label>Name:</label>
+          <input type="text" v-model="newPerson.name" />
+        </div>
+        <div class="form-group">
+          <label>Age:</label>
+          <input type="text" v-model="newPerson.age" />
+        </div>
+        <div class="form-group">
+          <label>Sex:</label>
+          <select v-model="newPerson.sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label></label>
+          <button @click="createPerson">Create</button>
+        </div>
+      </fieldset>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="person in people">
+            <td @click="detail($index)">{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.sex }}</td>
+            <!-- 这里的$index是对象的内置属性 -->
+            <td :class="'text-center'">
+              <button @click="deletePerson($index)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <section id="org_for">
+      <ol>
+        <li v-for="knowledge in knowledges">
+          {{knowledge.text}}
+        </li>
+      </ol>
+    </section>
+    <section id="org_on">
+      <p>{{message}}</p>
+      <button v-on:click="reverseMessage">Reverser Message</button>
+    </section>
+  </body>
+  <script src="./static/vue-dev.js"></script>
+  <script src="./static/test-vue.js"></script>
+</html>
