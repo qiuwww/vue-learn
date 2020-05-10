@@ -44,7 +44,8 @@ Vue Router 是 Vue.js **官方的路由管理器**。它和 Vue.js 的核心深�
 
 1. 依赖 HTML5 History API 和服务器配置，history 采用 HTML5 的新特性。
 2. history 模式，这种模式充分利用 **history.pushState | replaceState API** 来完成 URL 跳转**而无须重新加载页面**。
-3. 历史模式还需要后台配置支持，因为这里的路由请求，会直接到服务端。
+3. 每当活动的历史记录项发生变化时， popstate 事件都会被传递给 window 对象。如果当前活动的历史记录项是被 pushState 创建的，或者是由 replaceState 改变的，那么 popstate 事件的状态属性 state 会包含一个当前历史记录状态对象的拷贝。使用示例请参见 **window.onpopstate事件** 。
+4. 历史模式还需要后台配置支持，因为这里的路由请求，会直接到服务端。
    1. 可以通过前端开启`基于 Node.js 的 Express`服务来支持的。
 
 ## 完整的 vue-router 导航解析流程
