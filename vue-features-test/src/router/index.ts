@@ -95,6 +95,13 @@ const routes: Array<RouteConfig> = [
         path: '/Vue-Ts-Standard',
         name: '标准Vue+TS组件',
         component: () => import('@/views/Vue-Ts-Standard/index.vue')
+      },
+      // 测试功能点
+      {
+        path: '/vue-features-test-10/:id/:type',
+        name: '10个Vue开发技巧助力成为更好的工程师',
+        component: () => import('@/views/features-test-10/FeatureTest10.vue'),
+        props: true
       }
     ]
   }

@@ -18,6 +18,7 @@
       <router-link to="/component-base">组件基础</router-link>
       <router-link to="/mixin">混入</router-link>
       <router-link to="/Vue-Ts-Standard">Vue-Ts-Standard</router-link>
+      <router-link to="/vue-features-test-10/测试id/测试type">10个Vue开发技巧助力成为更好的工程师</router-link>
     </div>
     <h4>这里展示具体的页面内容:</h4>
     <router-view />
