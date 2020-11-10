@@ -8,21 +8,21 @@
 
 <script>
 export default {
-  name: 'ChildrenProps',
-  props: ['msg'],
-  inject: ['name'],
+  name: "ChildrenProps",
+  props: ["msg"],
+  inject: ["name"],
   mounted() {
-    console.log('inject', this.name); // 浪里行舟
-    console.log('ChildrenProps', this);
-    console.log('ChildrenProps this.$parent:', this.$parent);
-    console.log('ChildrenProps this.$listeners:', this.$listeners);
+    console.log("inject", this.name); // 浪里行舟
+    console.log("ChildrenProps", this);
+    console.log("ChildrenProps this.$parent:", this.$parent);
+    console.log("ChildrenProps this.$listeners:", this.$listeners);
   },
   methods: {
     postMsg: function() {
       // postMsg是一个自定义事件，在react中也是被当作一个属性进行传递
-      this.$emit('postMsg', { message: '子向父组件传值', from: this.name }); // 自定义事件，传递值“子向父组件传值”
-    },
-  },
+      this.$emit("postMsg", { message: "子向父组件传值", from: this.name }); // 自定义事件，传递值“子向父组件传值”
+    }
+  }
 };
 </script>
 

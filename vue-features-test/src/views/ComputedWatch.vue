@@ -6,9 +6,9 @@
     <p>
       直接计算: "{{
         message
-          .split('')
+          .split("")
           .reverse()
-          .join('')
+          .join("")
       }}"
     </p>
     <p>使用计算属性: "{{ reversedMessage }}"</p>
@@ -21,23 +21,23 @@
 <script>
 export default {
   data: () => ({
-    message: 'Hello World!',
+    message: "Hello World!",
 
-    firstName: 'Foo',
-    lastName: 'Bar',
-    fullName: 'Foo Bar',
+    firstName: "Foo",
+    lastName: "Bar",
+    fullName: "Foo Bar"
   }),
   created: function() {
-    this.reversedMessage = 'hahahha';
+    this.reversedMessage = "hahahha";
   },
   methods: {
     changeMsg: function() {
       // 这里表明计算属性与直接表但是完全一样，都会监听message的变化
-      this.message = this.message + 'a';
+      this.message = this.message + "a";
     },
     changeName: function() {
-      this.firstName = 'qiu';
-    },
+      this.firstName = "qiu";
+    }
   },
   computed: {
     // 这个时候，reversedMessage属性可以当作data内的，可以直接设置
@@ -46,24 +46,24 @@ export default {
       get: function() {
         // `this` 指向 vm 实例
         return this.message
-          .split('')
+          .split("")
           .reverse()
-          .join('');
+          .join("");
       },
       set: function() {
-        console.log('reversedMessage setter:', this.$data);
-      },
-    },
+        console.log("reversedMessage setter:", this.$data);
+      }
+    }
   },
   watch: {
     firstName: function(val) {
-      this.fullName = val + ' ' + this.lastName;
-      console.log('firstName 改变了，得到当前的fullName', this.fullName);
+      this.fullName = val + " " + this.lastName;
+      console.log("firstName 改变了，得到当前的fullName", this.fullName);
     },
     lastName: function(val) {
-      this.fullName = this.firstName + ' ' + val;
-      console.log('lastName 改变了，得到当前的fullName', this.fullName);
-    },
-  },
+      this.fullName = this.firstName + " " + val;
+      console.log("lastName 改变了，得到当前的fullName", this.fullName);
+    }
+  }
 };
 </script>

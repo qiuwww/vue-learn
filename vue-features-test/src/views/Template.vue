@@ -19,12 +19,12 @@
 
 <script>
 export default {
-  name: 'Template',
+  name: "Template",
   data: () => ({
-    msg: 'hello world!',
-    rawHtml: `<span style="color: red">This should be red.</span>`,
+    msg: "hello world!",
+    rawHtml: `<span style="color: red">This should be red.</span>`
   }),
-  props: {},
+  props: {}
 };
 </script>
 

@@ -7,27 +7,27 @@
 </template>
 
 <script>
-import { EventBus } from './event-bus.js';
+import { EventBus } from "./event-bus.js";
 export default {
-  name: 'ChildrenB',
+  name: "ChildrenB",
   data() {
     return {
-      msg: '',
+      msg: ""
     };
   },
   methods: {
     sendMsg() {
-      EventBus.$emit('childrenMsg', '来自B页面的消息');
-    },
+      EventBus.$emit("childrenMsg", "来自B页面的消息");
+    }
   },
   mounted() {
     // 接受消息
-    EventBus.$on('childrenMsg', (msg) => {
+    EventBus.$on("childrenMsg", msg => {
       this.msg = msg;
     });
-    EventBus.$on('parentMsg', (msg) => {
+    EventBus.$on("parentMsg", msg => {
       this.msg = msg;
     });
-  },
+  }
 };
 </script>

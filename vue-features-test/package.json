@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "yarn run serve",
     "serve": "vue-cli-service serve",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "eslint-fix": "eslint src/**/*.vue src/**/*.js src/**/*.ts --fix",
+    "fix": "npm run prettier-fix&&npm run eslint-fix",
+    "prettier-fix": "prettier --write src/**/*.{vue,ts,js}"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -43,35 +47,9 @@
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
     "typescript": "~3.8.3",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/typescript/recommended",
-      "@vue/prettier",
-      "@vue/prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {},
-    "overrides": [
-      {
-        "files": [
-          "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
-        ],
-        "env": {
-          "mocha": true
-        }
-      }
-    ]
+    "vue-template-compiler": "^2.6.11",
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^0.17.0"
   },
   "browserslist": [
     "> 1%",

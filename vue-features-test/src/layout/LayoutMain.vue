@@ -17,8 +17,8 @@
 
 <script>
 export default {
-  name: 'LayoutMain',
-  components: {},
+  name: "LayoutMain",
+  components: {}
 };
 </script>
 

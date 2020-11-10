@@ -11,18 +11,18 @@
 </template>
 
 <script>
-var LocalComponent = {
-  name: 'LocalComponent',
-  props: ['message'],
+const LocalComponent = {
+  name: "LocalComponent",
+  props: ["message"],
   template:
-    "<div><h1>{{message}}</h1><input type='text' v-model='message'></input></div>",
+    "<div><h1>{{message}}</h1><input type='text' v-model='message'></input></div>"
 };
 
 export default {
-  name: 'CompoentTest',
+  name: "CompoentTest",
   component: {
-    LocalComponent,
-  },
+    LocalComponent
+  }
 };
 </script>
 
