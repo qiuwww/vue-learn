@@ -7,47 +7,47 @@
 </template>
 
 <script>
-import Children from './Children.vue';
+import Children from "./Children.vue";
 export default {
   data() {
     return {
-      message: 'hello',
+      message: "hello"
     };
   },
   components: {
-    VChildren: Children,
+    VChildren: Children
   },
   beforeCreate() {
-    console.log('Parent beforeCreate');
+    console.log("Parent beforeCreate");
   },
   created() {
-    console.log('Parent created');
+    console.log("Parent created");
     // 这里定时改变message
     setTimeout(() => {
       this.message = this.message
-        .split('')
+        .split("")
         .reverse()
-        .join('');
+        .join("");
     }, 1000);
   },
   beforeMount() {
-    console.log('Parent beforeMount');
+    console.log("Parent beforeMount");
   },
   mounted() {
-    console.log('Parent mounted');
+    console.log("Parent mounted");
   },
   beforeUpdate() {
-    console.log('Parent beforeUpdate');
+    console.log("Parent beforeUpdate");
   },
   updated() {
-    console.log('Parent updated');
+    console.log("Parent updated");
   },
   beforeDestroy() {
-    console.log('Parent beforeDestroy');
+    console.log("Parent beforeDestroy");
   },
   destroyed() {
-    console.log('Parent destroyed');
-  },
+    console.log("Parent destroyed");
+  }
 };
 </script>
 

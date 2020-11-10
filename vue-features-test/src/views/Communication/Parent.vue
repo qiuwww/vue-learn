@@ -14,29 +14,29 @@
 </template>
 
 <script>
-import ChildrenProps from './ChildrenProps.vue';
-import { EventBus } from './event-bus/event-bus.js';
+import ChildrenProps from "./ChildrenProps.vue";
+import { EventBus } from "./event-bus/event-bus.js";
 
-import ChildrenA from './event-bus/ChildrenA.vue';
-import ChildrenB from './event-bus/ChildrenB.vue';
+import ChildrenA from "./event-bus/ChildrenA.vue";
+import ChildrenB from "./event-bus/ChildrenB.vue";
 
 export default {
   provide: {
-    name: '浪里行舟',
+    name: "浪里行舟"
   },
   data() {
     return {
       msg: [],
-      childrenMsg: '',
+      childrenMsg: ""
     };
   },
   components: {
-    'children-props-emit': ChildrenProps,
+    "children-props-emit": ChildrenProps,
     ChildrenA,
-    ChildrenB,
+    ChildrenB
   },
   mounted() {
-    EventBus.$on('childrenMsg', (msg) => {
+    EventBus.$on("childrenMsg", msg => {
       this.childrenMsg = msg;
     });
   },
@@ -44,14 +44,14 @@ export default {
   methods: {
     // 调用父组件的事件来处理响应
     postMsg: function(msg) {
-      console.log('父组件事件被调用，父组件接受到响应信息', msg);
+      console.log("父组件事件被调用，父组件接受到响应信息", msg);
       this.msg.push(msg);
     },
     // 事件总线调用
     postMsg2AB: function() {
-      EventBus.$emit('parentMsg', '来自Parent组件的消息');
-    },
-  },
+      EventBus.$emit("parentMsg", "来自Parent组件的消息");
+    }
+  }
 };
 </script>
 

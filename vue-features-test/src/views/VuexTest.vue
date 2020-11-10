@@ -23,55 +23,55 @@
 
 <script>
 // 在单独构建的版本中辅助函数为 Vuex.mapState
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      localCount: 10,
+      localCount: 10
     };
   },
   created() {
-    console.log('created', this);
+    console.log("created", this);
     this.getQuotes();
   },
   computed: {
     // 方便使用state
     ...mapState({
       // 箭头函数可使代码更简练
-      count2: (state) => state.count,
+      count2: state => state.count,
 
       // 传字符串参数 'count' 等同于 `state => state.count`
-      count3: 'count',
-      quote: 'quote',
+      count3: "count",
+      quote: "quote",
       // 为了能够使用 `this` 获取局部状态，必须使用常规函数
       countPlusLocalState(state) {
         return state.count + this.localCount;
-      },
+      }
     }),
     ...mapGetters({
       // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
-      doneCounts: 'doneTodosCount',
+      doneCounts: "doneTodosCount"
       // ...
     }),
     // 通过$store直接返回
     count1() {
       return this.$store.state.count;
-    },
+    }
   },
   methods: {
     // 定义事件，调用Vuex
     increment: function() {
-      this.$store.commit('increment');
+      this.$store.commit("increment");
       console.log(this.$store.state.count);
     },
     ...mapMutations({
-      add: 'increment', // 将 `this.add()` 映射为 `this.$store.commit('increment')`
+      add: "increment" // 将 `this.add()` 映射为 `this.$store.commit('increment')`
     }),
     ...mapActions({
-      getQuotes: 'getQuotes',
-    }),
-  },
+      getQuotes: "getQuotes"
+    })
+  }
 };
 </script>
 
