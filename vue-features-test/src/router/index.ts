@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
+    path: '/page',
     name: 'LayoutMain',
     component: LayoutMain,
     // 这里做子组件，就需要在父组件设置位置
@@ -106,6 +106,8 @@ const routes: Array<RouteConfig> = [
     ]
   }
 ];
+
+console.log('routes', routes);
 
 const router = new VueRouter({
   mode: 'hash',
