@@ -42,16 +42,16 @@ categories:
    1. 得到一个**新的值**，这个值不能与 data 中返回的值重名，这个值可以直接使用。
    2. 当前的值，在依赖的可观察的数据更改的时候触发。
 2. watch，观察值，key/value，数据对组成
-   1. 观察 data 中的数据，有变动的时候，调用对应的回调函数，就像是专门做的副作用操作。
+   1. 观察 data 中的数据，有变动的时候，调用对应的回调函数，**就像是专门做的副作用操作**。
 
 总结二者的使用场景：
 
-1. 当我们要进行**数值计算**，而且依赖于其他数据，那么把这个数据设计为 computed；
+1. 当我们要进行**数值计算**，而且**依赖于其他数据**，那么把这个数据设计为 computed；
 2. 如果你需要在某个数据变化时**做一些事情（副作用）**，使用 watch 来观察这个数据变化。
 
 ## 输入框的值的格式化问题
 
-控制输入框的输入格式；
+控制输入框的输入格式：
 
 1. `type="number"` 来控制，但是不能过滤掉 e 这个字母，标示自然底数；
 2. **number 修饰符 可以控制只输入数字**；v-model.number，与 type="number"操作一致；
@@ -70,6 +70,7 @@ categories:
       oldNum: 0,
     },
     computed: {
+      // v-model指向于一个计算属性，就需要添加set方法，且一般的set方法需要依赖外部变量来保存状态传递给get方法。
       inpNum: {
         get: function () {
           return this.oldNum;
@@ -86,9 +87,9 @@ categories:
 
 ### 最终的解决方案
 
-1. 首先对`v-model`，添加`input`替换为`change`事件的.lazy 的修饰符；
+1. 首先对`v-model`，添加`input`替换为`change`事件的 `.lazy` 的修饰符；
 2. 使用指令来绑定`input`事件，这个时候`input`在`change`事件前面触发，所以可以先对数据进行格式化，然后映射到 model 上；
-3. 输入框的事件触发流程 `focus-keydown-input（这个时候可以拿到value）-keyup-change-blur`
+3. 输入框的事件触发流程 `focus->keydown->input（这个时候可以拿到value）->keyup->change->blur`。
 
 ```html
 <input

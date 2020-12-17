@@ -1,1 +1,0 @@
-[参考项目](https://github.com/lzxb/vue2-demo/blob/master/src/entry-server.ts)

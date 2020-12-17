@@ -9,15 +9,13 @@ categories:
   - SSR
 ---
 
-[查看 demo](../vue-ssr)
-
 ## 什么是服务器端渲染 (SSR)
 
 1. 浏览器请求 url，服务端返回一个**渲染好首屏的 html**；
 2. 相较于 spa，对于多个路由，会返回多个页面，页面的 head 信息不尽相同；
 3. 基本一渲染好的，不像 spa，只有一个根节点，页面全靠 js 渲染；
 
-[服务端渲染](../imgs/服务端渲染.jpg)
+[服务端渲染](./imgs/服务端渲染.jpg)
 
 ## 为什么使用服务器端渲染 (SSR)
 
@@ -47,8 +45,6 @@ categories:
 2. 服务端代码，请求返回一个使用 Vue 渲染的页面；
 
 ### 页面构建核心代码
-
-[ssr](../vue-ssr/src/express-server.js)
 
 ```js
 const Vue = require('vue');
@@ -106,7 +102,7 @@ renderer.renderToString(app, (err, html) => {
 [中文官方文档](https://www.nuxtjs.cn/guide)
 
 1. Nuxt.js 预设了利用 Vue.js 开发服务端渲染的应用所需要的各种配置。
-2. 下图阐述了 Nuxt.js 应用一个完整的服务器请求到渲染（或用户通过 <nuxt-link> 切换路由渲染页面）的流程：![nuxt-schema](./imgs/nuxt-schema.svg)
+2. 下图阐述了 Nuxt.js 应用一个完整的服务器请求到渲染（或用户通过 `<nuxt-link>` 切换路由渲染页面）的流程：![nuxt-schema](./imgs/nuxt-schema.svg)
 
 ### 工程创建 ｜ 打包
 

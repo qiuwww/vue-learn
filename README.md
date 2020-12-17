@@ -8,14 +8,6 @@
 
 vue 学习笔记，保存的资料，**温故而知新**。
 
-## vue-features-test
+## vue-features-test / ~2.0
 
 vue 功能测试，基本 demo。
-
-1. ts
-2. vuex
-3. vue-router
-
-## vue-ts
-
-vue，ts 基础 demo。

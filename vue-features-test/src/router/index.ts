@@ -52,7 +52,7 @@ const routes: Array<RouteConfig> = [
       {
         path: '/test/component-regist',
         name: 'component-regist',
-        component: () => import('@/views/ComponentRegist/index.vue')
+        component: () => import('@/views/ComponentRegister/index.vue')
       },
       {
         path: '/test/communication',
