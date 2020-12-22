@@ -11,6 +11,11 @@ categories:
 2. 除了直接绑定到一个方法，也可以在内联 JavaScript 语句中调用方法，可以传递参数；
 3. 有时也需要在内联语句处理器中**访问原始的 DOM 事件**。可以用特殊变量 `$event` 把它传入方法。
 
+## [Vue 中事件绑定@click 的原理](https://blog.csdn.net/ichangebaobao/article/details/109339038)
+
+1. `<div @click="fn()"></div>`原生 dom 事件的绑定，采用的是 addEventListener 实现；
+2. `<my-component @click.native="fn" @click="fn1"></my-component>`组件绑定事件采用的是 $on 方法；
+
 ## [v-on 指令修饰符](https://cn.vuejs.org/v2/api/#v-on)
 
 [事件修饰符](https://cn.vuejs.org/v2/guide/events.html#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6)

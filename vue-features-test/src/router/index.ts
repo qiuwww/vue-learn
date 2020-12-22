@@ -102,6 +102,18 @@ const routes: Array<RouteConfig> = [
         name: '10个Vue开发技巧助力成为更好的工程师',
         component: () => import('@/views/features-test-10/FeatureTest10.vue'),
         props: true
+      },
+      {
+        path: '/VModelComponent',
+        name: 'VModelComponent',
+        component: () => import('@/views/VModelComponent.vue'),
+        props: true
+      },
+      {
+        path: '/JSXComponent',
+        name: 'JSXComponent',
+        component: () => import('@/views/JSXComponent.vue'),
+        props: true
       }
     ]
   }

@@ -110,3 +110,9 @@ computed: {
 }
 <input v-modle="user" />
 ```
+
+## Redux 对比 Vuex
+
+Redux： view——>actions——>reducer——>state 变化——>view 变化（同步异步一样）
+
+Vuex： view——>commit——>mutations——>state 变化——>view 变化（同步操作） view——>dispatch——>actions——>mutations——>state 变化——>view 变化（异步操作）

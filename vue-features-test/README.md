@@ -379,3 +379,44 @@ export default {
   }
 };
 ```
+
+## jsx 支持
+
+安装依赖：
+
+`@vue/babel-preset-jsx @vue/babel-helper-vue-jsx-merge-props`
+
+配置 .babelrc ：
+
+```js
+module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset',
+    [
+      '@vue/babel-preset-jsx',
+      {
+        injectH: false
+      }
+    ]
+  ]
+};
+```
+
+## [配置环境变量](https://segmentfault.com/a/1190000015133974)
+
+在项目中，也就是 src 中使用环境变量的话，必须以 VUE*APP*开头。
+
+cli-3.0 总共提供了四种方式来制定环境变量：
+
+1. 在根目录添加.env 文件，配置所有情况下都会用到的配置（不知道这个存在的意义，所有的都需要的也就不需要配置了吧）。
+2. 在根目录添加.env.local 文件，**配置所有情况下都会用到的配置，与.env 的区别是只会在本地，该文件不会被 git 跟踪**。
+3. 在根目录添加.env.[mode] 文件，配置对应某个模式下的配置,比如：.env.development 来配置开发环境的配置。
+4. 在根目录添加.env.[mode].local 文件，配置对应某个模式下的配置,与.env.[mode]的区别也只是会在本地生效，该文件不会被 git 跟踪。
+
+模式是 Vue CLI 项目中的一个重要概念。默认情况下，Vue CLI 项目中有三种模式：
+
+1. development：在 vue-cli-service serve 下，即开发环境使用
+2. production：在 vue-cli-service build 和 vue-cli-service test:e2e 下，即正式环境使用
+3. test： 在 vue-cli-service test:unit 下使用
+
+如果你想要修改模式下默认的环境变量的话可以通过`--mode mode`来实现
