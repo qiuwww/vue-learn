@@ -56,32 +56,20 @@
   <body>
     <div class="drag-content" id="dragCon">
       <div class="project-content">
-        <div
-          class="select-item"
-          draggable="true"
-          @dragstart="drag($event)"
-          v-for="pjdt in projectdatas"
-        >
+        <div class="select-item" draggable="true" @dragstart="drag($event)" v-for="pjdt in projectdatas">
           {{pjdt.name}}
         </div>
       </div>
       <div class="people-content">
-        <div
-          class="drag-div"
-          v-for="ppdt in peopledata"
-          @drop="drop($event)"
-          @dragover="allowDrop($event)"
-        >
+        <div class="drag-div" v-for="ppdt in peopledata" @drop="drop($event)" @dragover="allowDrop($event)">
           <div class="select-project-item">
             <label class="drag-people-label">{{ppdt.name}}:</label>
           </div>
         </div>
       </div>
     </div>
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"
-    ></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script> -->
+    <script src="./vue.2.6.14.js"></script>
     <script type="text/javascript">
       var dom;
       var ss = new Vue({

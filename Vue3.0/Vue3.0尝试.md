@@ -14,14 +14,14 @@ typora-copy-images-to: upload
 为了处理随着状态增加而增加的各种 data、methods、computed 以及 mounted 等，vue2.0 给出的解决方案就是 **Mixin**。
 
 1. [setup 官方文档；](https://v3.cn.vuejs.org/guide/composition-api-setup.html#%E5%8F%82%E6%95%B0)
-    1. 执行 setup 时，组件实例尚未被创建；
-    2. setup 接受的 props，还是需要声明一下接受参数的；
-    3. setup 是 Vue3.x 新增的一个选项， 他是组件内使用 Composition API 的入口。
-    4. setup 中接受的 props 是响应式的， 当传入新的 props 时，会及时被更新。**由于是响应式的， 所以不可以使用 ES6 解构，解构会消除它的响应式**。
-        1. 如果需要解构 prop，可以在 setup 函数中使用 toRefs 函数来完成此操作。
+   1. 执行 setup 时，组件实例尚未被创建；
+   2. setup 接受的 props，还是需要声明一下接受参数的；
+   3. setup 是 Vue3.x 新增的一个选项， 他是组件内使用 Composition API 的入口。
+   4. setup 中接受的 props 是响应式的， 当传入新的 props 时，会及时被更新。**由于是响应式的， 所以不可以使用 ES6 解构，解构会消除它的响应式**。
+      1. 如果需要解构 prop，可以在 setup 函数中使用 toRefs 函数来完成此操作。
 2. [context 是一个普通 JavaScript 对象](https://v3.cn.vuejs.org/guide/composition-api-setup.html#context)，暴露了其它可能在 setup 中有用的值。
-    1. `{ attrs, slots, emit, expose }`；
-    2. attrs 和 slots 是有状态的对象，它们总是会随组件本身的更新而更新。这意味着你应该避免对它们进行解构，并始终以 attrs.x 或 slots.x 的方式引用 property。
+   1. `{ attrs, slots, emit, expose }`；
+   2. attrs 和 slots 是有状态的对象，它们总是会随组件本身的更新而更新。这意味着你应该避免对它们进行解构，并始终以 attrs.x 或 slots.x 的方式引用 property。
 3. 在 vue2.x 中， 定义数据都是在 data 中， 但是 Vue3.x 可以使用 reactive 和 ref 来进行数据定义。
 4. 如果 setup 返回一个对象，那么该对象的 property 以及传递给 setup 的 props 参数中的 property 就都可以在模板中访问到。
 
@@ -50,11 +50,11 @@ _基本使用：_
 
 从上面一段简短的代码中可以看出`Composition API`的最大的一个特点，**灵活**，在 vue2.0 中我们需要遵循下面的编码形式
 
--   在`props` 里面设置接收参数
--   在`data` 里面设置变量
--   在 `computed` 里面设置计算属性
--   在 `watch` 里面设置监听属性
--   在`methods` 里面设置事件方法
+- 在`props` 里面设置接收参数
+- 在`data` 里面设置变量
+- 在 `computed` 里面设置计算属性
+- 在 `watch` 里面设置监听属性
+- 在`methods` 里面设置事件方法
 
 现在使用 `Composition API`，不再这么约定了，代码组织变的非常灵活，我们的控制代码写在 `setup` 里面即可。那么这种方式可以解决现有模式的什么问题呢？借用官网的一张图和描述
 
@@ -161,15 +161,15 @@ Vue3.0 之前只有函数式组件支持多根节点，但是由于函数式组�
 
 **8.值得注意的变动**
 
--   函数式组件和和普通组件的创建方式统一，废除`functional`选项。
--   异步组件需要通过`defineAsyncComponent`API 包装定义。
--   `Mixin`合并策略调整，不会合并额外的属性。
--   vue 实例挂载的时候只替换根元素的`innerHTML`。
--   `data`统一只能声明为函数
--   `$attr`现包含`class`和`style`
--   今天的分享就到这了，想知道更多请移步文档学习**[Vue](https://v3.vuejs.org/guide/introduction.html)**
+- 函数式组件和和普通组件的创建方式统一，废除`functional`选项。
+- 异步组件需要通过`defineAsyncComponent`API 包装定义。
+- `Mixin`合并策略调整，不会合并额外的属性。
+- vue 实例挂载的时候只替换根元素的`innerHTML`。
+- `data`统一只能声明为函数
+- `$attr`现包含`class`和`style`
+- 今天的分享就到这了，想知道更多请移步文档学习**[Vue](https://v3.vuejs.org/guide/introduction.html)**
 
-    # 感谢！
+  # 感谢！
 
 ## 参考
 

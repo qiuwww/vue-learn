@@ -3,7 +3,8 @@
   <head>
     <title>Vue lifecycle</title>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="./vue.2.6.14.js"></script>
   </head>
 
   <body>
@@ -42,7 +43,7 @@
           console.log(
             '%c%s',
             'color:blue',
-            '实例初始化之后，this指向创建的实例，不能访问到data，computed，watch，methods上的方法和数据。常用于初始化非响应式变量，比如获取url参数，获取cookie信息等。'
+            '实例初始化前，this指向创建的实例，不能访问到data，computed，watch，methods上的方法和数据。常用于初始化非响应式变量，比如获取url参数，获取cookie信息等。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el); //undefined
           console.log('%c%s', 'color:red', 'data   : ' + this.$data); //undefined
@@ -57,14 +58,10 @@
           console.log(
             '%c%s',
             'color:blue',
-            '实例创建完成，可以访问data，computed等，未挂载到dom，$el为空，常用于ajax的请求，页面的初始化。'
+            '实例创建完成，可以访问data，computed等，未挂载到dom，$el为空，常用于ajax的请求，页面的初始化。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el); //undefined
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          ); //已被初始化
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data)); //已被初始化
           console.log('%c%s', 'color:red', '当前组件 ', this); //已被初始化
           console.groupEnd();
           console.log('\n\n');
@@ -72,17 +69,9 @@
         // 在挂载开始之前被调用：相关的 render 函数首次被调用
         beforeMount: function () {
           console.group('beforeMount 挂载前状态===============》');
-          console.log(
-            '%c%s',
-            'color:blue',
-            '挂载之前被调用，会找到template，并编译成render函数。'
-          );
+          console.log('%c%s', 'color:blue', '挂载之前被调用，会找到template，并编译成render函数。');
           console.log('%c', 'color:red', 'el     : ', this.$el); //已被初始化
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          ); //已被初始化
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data)); //已被初始化
           console.log('%c%s', 'color:red', '当前组件 ', this); //已被初始化
           console.groupEnd();
           console.log('\n\n');
@@ -94,14 +83,10 @@
           console.log(
             '%c%s',
             'color:blue',
-            '已挂载，此时可以通过dom api获取dom节点，$ref可用， 常用于获取VNode信息和操作，ajax请求。'
+            '已挂载，此时可以通过dom api获取dom节点，$ref可用， 常用于获取VNode信息和操作，ajax请求。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el); //已被初始化
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          ); //已被初始化
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data)); //已被初始化
           console.log('%c%s', 'color:red', '当前组件 ', this); //已被初始化
           console.groupEnd();
           console.log('\n\n');
@@ -112,14 +97,10 @@
           console.log(
             '%c%s',
             'color:blue',
-            '响应式数据更新时候调用，发生在虚拟dom打补丁之前，适合在更新之前访问现有的dom，比如手动移除已添加的时间监听器。'
+            '响应式数据更新时候调用，发生在虚拟dom打补丁之前，适合在更新之前访问现有的dom，比如手动移除已添加的时间监听器。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el);
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          );
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data));
           console.log('%c%s', 'color:red', '当前组件 ', this);
           console.groupEnd();
           console.log('\n\n');
@@ -132,14 +113,10 @@
           console.log(
             '%c%s',
             'color:blue',
-            '虚拟dom重新渲染和打补丁之后调用，组件dom已经更新，可执行依赖dom的操作，避免在这里操作数据，以防陷入死循环。'
+            '虚拟dom重新渲染和打补丁之后调用，组件dom已经更新，可执行依赖dom的操作，避免在这里操作数据，以防陷入死循环。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el);
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          );
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data));
           console.log('%c%s', 'color:red', '当前组件 ', this);
           console.groupEnd();
           console.log('\n\n');
@@ -150,14 +127,10 @@
           console.log(
             '%c%s',
             'color:blue',
-            '实例销毁之前，这个时候，实例仍然可用，常用于销毁定时器，解绑全局事件，销毁插件对象等操作。'
+            '实例销毁之前，这个时候，实例仍然可用，常用于销毁定时器，解绑全局事件，销毁插件对象等操作。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el);
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          );
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data));
           console.log('%c%s', 'color:red', '当前组件 ', this);
           console.groupEnd();
           console.log('\n\n');
@@ -168,19 +141,17 @@
           console.log(
             '%c%s',
             'color:blue',
-            '所有的东西都会解绑，所有的事件监听都会被移除，所有的子实例都会被销毁，这个时候el还是可以访问的。'
+            '所有的东西都会解绑，所有的事件监听都会被移除，所有的子实例都会被销毁，这个时候el还是可以访问的。',
           );
           console.log('%c', 'color:red', 'el     : ', this.$el);
-          console.log(
-            '%c%s',
-            'color:red',
-            'data   : ' + JSON.stringify(this.$data)
-          );
+          console.log('%c%s', 'color:red', 'data   : ' + JSON.stringify(this.$data));
           console.log('%c%s', 'color:red', '当前组件 ', this);
           console.groupEnd();
           console.log('\n\n');
         },
       };
+
+      console.log('createComponentConfig:', createComponentConfig);
 
       // 声明实例的变量
       var vm;
@@ -189,15 +160,17 @@
           'click',
           function (e) {
             vm = new Vue(createComponentConfig);
+            debugger;
           },
-          false
+          false,
         );
         document.querySelector('.mount').addEventListener(
           'click',
           function (e) {
             vm.$mount('#app');
+            debugger;
           },
-          false
+          false,
         );
         document.querySelector('.update').addEventListener(
           'click',
@@ -205,16 +178,18 @@
             vm.$data.message = 'test updata';
             // 这里，更改$data是会触发更新的，不需要强制更新
             // vm.$forceUpdate();
+            debugger;
           },
-          false
+          false,
         );
         document.querySelector('.destroy').addEventListener(
           'click',
           function (e) {
             vm.$destroy();
+            debugger;
             // vue2.0之后主动调用$destroy()不会移除dom节点，作者不推荐直接destroy这种做法，如果实在需要这样用可以在这个生命周期钩子中手动移除dom节点。
           },
-          false
+          false,
         );
       };
     </script>
