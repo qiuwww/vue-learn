@@ -15,9 +15,7 @@
 
     <h3 class="view-area"></h3>
 
-    <button class="change-area">
-      直接改变变量的值来改变上边的内容,反向字符串
-    </button>
+    <button class="change-area">直接改变变量的值来改变上边的内容,反向字符串。</button>
 
     <script>
       window.onload = function () {
@@ -47,7 +45,7 @@
             var value = e.target.value;
             inputValue = value;
           },
-          false
+          false,
         );
 
         document.querySelector('.change-area').addEventListener(
@@ -55,7 +53,7 @@
           function (e) {
             inputValue = inputValue.split('').reverse().join('');
           },
-          false
+          false,
         );
       };
     </script>

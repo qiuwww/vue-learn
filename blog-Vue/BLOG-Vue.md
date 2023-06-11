@@ -10,7 +10,7 @@ categories:
 
 [TOC]
 
-Vue (读音 /vjuː/，类似于 view) **是一套用于构建用户界面的渐进式框架**。与其它大型框架不同的是，**Vue 被设计为可以自底向上逐层应用**。**Vue 的核心库只关注视图层**，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
+Vue (读音 `/vjuː/`，类似于 view) **是一套用于构建用户界面的渐进式框架**。与其它大型框架不同的是，**Vue 被设计为可以自底向上逐层应用**。**Vue 的核心库只关注视图层**，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
 
 ## Vue 的主体内容
 
@@ -18,7 +18,7 @@ Vue (读音 /vjuː/，类似于 view) **是一套用于构建用户界面的渐�
 2. 依赖更新
 3. Virtual DOM ，dom 节点 生成虚拟 Vnode 节点
 4. Compile， 模板编译
-5. Diff、Patch， 节点比较更新
+5. Diff、Patch， 节点比较更新（在组件层面上）；
 6. NextTick ，延迟执行回调
 7. Render， 渲染机制
 8. LifeCircle ，生命周期
@@ -35,7 +35,7 @@ Vue (读音 /vjuː/，类似于 view) **是一套用于构建用户界面的渐�
     1. 模型层，主要**负责业务数据相关**；`data(){}`
 2. V（View，**视图层**， 也就是模板）；
     1. 视图层，顾名思义，负责视图相关，**细分下来就是 html+css 层**；`template`
-3. VM（ViewModel，V 与 M 连接的桥梁，也可以看作为**控制器**）。
+3. VM（ViewModel，V 与 M 连接的桥梁，也可以看作为**控制器**），主要是一堆的Watcher。
     1. ViewModel 是 Vue.js 的核心，**它是一个 Vue 实例**。Vue 实例是**作用于某一个 HTML 元素上的**，这个元素可以是 HTML 的 body 元素，也可以是指定了 id 的某个元素。
     2. 负责监听 M 或者 V 的修改，是实现 MVVM 双向绑定的要点；`watch|method|computed|directive等`。
 
@@ -43,7 +43,7 @@ MVVM 支持**双向绑定**，意思就是当**M 层数据**进行修改时，**
 
 ### 双向数据绑定的实现，数据劫持
 
-Vue 实现数据双向绑定主要是：采用数据劫持结合发布者-订阅者模式的方式，通过 Object 对象的 defineProperty 方法，重写 data 的 set 和 get 函数来实现的。可以查看 demo，[data-two-way-binding](./data-two-way-binding/Object.defineProperty实现数据双向绑定.html)。
+**Vue 实现数据双向绑定主要是：采用数据劫持结合发布者-订阅者模式的方式**，通过 Object 对象的 defineProperty 方法，重写 data 的 set 和 get 函数来实现的。可以查看 demo，[data-two-way-binding](./data-two-way-binding/Object.defineProperty实现数据双向绑定.html)。
 
 ```js
 // 使用get和set
@@ -72,7 +72,7 @@ Object.defineProperty(obj, 'a', {
 
 #### Vue 双向数据绑定原理，依赖收集是在什么时候收集的
 
-是在 **created 生命周期之前**，render 生成虚拟 dom 的时候，也就是 beforeCreated -> created 的时候。
+是在 **created 生命周期之前，render 生成虚拟 dom 的时候**，也就是 beforeCreated -> created 的时候。
 
 #### 为什么 Vue 不需要 shouldComponentUpdate
 
@@ -136,7 +136,9 @@ data 必须声明为**返回一个初始数据对象的函数**，因为**组件
 
 ## 🍎Vue 的生命周期有哪些，都在什么时候触发，一般用来做什么
 
-[官方文档](https://cn.vuejs.org/v2/api/#%E9%80%89%E9%A1%B9-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90) [生命周期示意图](https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA)
+[官方文档](https://cn.vuejs.org/v2/api/#%E9%80%89%E9%A1%B9-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90)
+
+[生命周期示意图](https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA)
 
 总共分为 8 个阶段：
 
@@ -273,7 +275,7 @@ Proxy 的问题：
 
 1. Proxy 是 es6 提供的新特性，兼容性不好，最主要的是这个属性无法用 polyfill 来兼容；
 
-### 生命周期的改变
+### Vue3的生命周期的改变
 
 ![vue3.0的生命周期](./imgs/vue3.0的生命周期.webp)
 
@@ -297,3 +299,220 @@ Proxy 的问题：
 2. 它和 reactive 的差别，就是前者没有包装属性 value
 
 注意区别，[页面元素的引用](https://cn.vuejs.org/v2/api/#ref)。
+
+## 路由懒加载（按需加载路由）
+
+1. webpack 的代码分割功能：webpack 中提供了 `require.ensure()`来实现按需加载。目前已被`import()`方法替代；
+2. ES6 的异步机制；
+3. vue 异步组件实现懒加载。
+
+```js
+// 1. 进行页面按需加载的引入方式
+const home = (r) => require.ensure([], () => r(require('../common/home.vue')));
+
+// 2. ES的import接口，webpack先实现，可用
+const HelloWorld = （）=>import('需要加载的模块地址');
+
+// 3. Vue提供的，可以在组件中使用
+component：resolve=>(require(['需要加载的路由的地址'])，resolve);
+```
+
+## 两种路由模式
+
+[mode](https://router.vuejs.org/zh/api/#mode)
+
+1. 默认值: "hash" (浏览器环境) | "abstract" (Node.js 环境)
+2. 可选值: "hash" | "history" | "abstract"
+
+### abstract
+
+支持所有 JavaScript 运行环境，如 Node.js 服务器端。如果发现没有浏览器的 API，路由会自动强制进入这个模式。
+
+### hash 模式
+
+1. 使用 URL hash 值来作路由。**支持所有浏览器**，包括不支持 HTML5 History Api 的浏览器。
+2. vue-router **默认 hash 模式** —— **使用 URL 的 hash 来模拟一个完整的 URL**，
+3. 于是当 URL 改变时，页面**不会重新加载**。
+4. 使用 **hashchange 事件和 location.hash**，来控制状态及事件处理。
+
+特点：
+
+1. hash 虽然在 URL 中，但不被包括在 HTTP 请求中；
+2. 用来指导浏览器动作，对服务端安全无用，**hash 不会重加载页面**。
+
+### history 模式
+
+1. 依赖 HTML5 History API 和服务器配置，history 采用 HTML5 的新特性。
+2. history 模式，这种模式充分利用 **history.pushState | replaceState API** 来完成 URL 跳转**而无须重新加载页面**。
+3. 每当活动的历史记录项发生变化时， popstate 事件都会被传递给 window 对象。如果当前活动的历史记录项是被 pushState 创建的，或者是由 replaceState 改变的，那么 popstate 事件的状态属性 state 会包含一个当前历史记录状态对象的拷贝。使用示例请参见 **window.onpopstate 事件** 。
+4. 历史模式还需要后台配置支持，因为这里的路由请求，会直接到服务端。
+   1. 可以通过前端开启`基于 Node.js 的 Express`服务来支持的。
+
+## Vue 组件间通信
+
+1. 父子组件通信；
+2. 兄弟组件通信；
+3. 跨组件通信；
+
+### Vue 组件间通信六种方式
+
+[vue 组件间通信六种方式（完整版）](https://segmentfault.com/a/1190000019208626?utm_source=tag-newest)
+
+vue 组件间通信的几种方式，如
+
+1. `props/\$emit`，直接作为属性传递；
+   1. 父组件向子组件传值，`props/@:event`；
+   2. 子组件向父组件传值（通过事件形式）`$emit`，
+2. `$emit/$on`，**发布订阅模式**；
+   1. 这种方法通过一个**空的 Vue 实例作为中央事件总线（事件中心）**，用它来触发事件和监听事件，
+   2. 巧妙而轻量地实现了**任何组件间的通信**，包括父子、兄弟、跨级。
+3. vuex，全局状态管理，`this.$store`；
+4. `$parent/$children`、**直接拿到组件的引用**，当然不太推荐；
+   1. [vm-parent](https://cn.vuejs.org/v2/api/#vm-parent)
+   2. [vm.\$children](https://cn.vuejs.org/v2/api/#vm-children)
+5. `$attrs/$listeners`；
+   1. [vm-attrs](https://cn.vuejs.org/v2/api/#vm-attrs)
+   2. [vm-listeners](https://cn.vuejs.org/v2/api/#vm-listeners)
+6. `provide/inject`，**允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深**，并在起上下游关系成立的时间里始终生效。
+   1. 与 React 的 context 基本一致，不过更方便，不需要引用了；
+
+## 自定义指令的使用
+
+区分全局与当前组件的指令。
+
+[官方文档](https://cn.vuejs.org/v2/guide/custom-directive.html)
+
+[主要的生命周期](https://cn.vuejs.org/v2/guide/custom-directive.html#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0)：
+
+1. bind
+2. inserted
+3. update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。
+4. componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
+5. unbind
+
+```js
+Vue.directive('color-switch', function (el, binding) {
+  el.style.backgroundColor = binding.value;
+})
+// bind
+// bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+bind: function (el, binding, vnode) {
+  // el 绑定的元素
+  // binding，指令的相关参数
+  // vnode，Vue 编译生成的虚拟节点
+}
+```
+
+## vue 中及时的清除定时器的写法
+
+```vue
+<script>
+export default {
+  mounted() {
+    const timer = setInterval(() => {
+      this.getList();
+    }, 1000);
+
+    this.$once('hook:beforeDestroy', () => {
+      clearInterval(timer);
+    });
+  },
+};
+</script>
+```
+
+## Vue的虚拟Dom和Diff算法
+
+[节点、树以及虚拟 DOM](https://cn.vuejs.org/v2/guide/render-function.html#%E8%8A%82%E7%82%B9%E3%80%81%E6%A0%91%E4%BB%A5%E5%8F%8A%E8%99%9A%E6%8B%9F-DOM)
+
+### Virtual DOM 是什么
+
+1. Virtual DOM 就是用一个原生的 JS 对象去描述一个 DOM 节点，所以**它比创建一个 DOM 的代价要小很多**；
+   1. js 对象处理很快；
+   2. 操作 dom 的速度很慢；
+2. **Vue 通过建立一个虚拟 DOM 来追踪自己要如何改变真实 DOM**。
+3. `return createElement('h1', this.blogTitle)`，
+   1. 其实不是一个实际的 DOM 元素。它更准确的名字可能是 `createNodeDescription`，因为它所包含的信息**会告诉 Vue 页面上需要渲染什么样的节点**，包括及其子节点的描述信息。
+   2. 我们把这样的节点描述为`“虚拟节点 (virtual node)”`，也常简写它为“VNode”。“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
+4. 组件树中的所有 VNode **必须是唯一的**。
+
+### Virtual DOM 什么用
+
+其实虚拟 DOM 在 Vue.js 中主要做了两件事：
+
+1. **提供与真实 DOM 节点所对应的虚拟节点 VNode**；
+2. 将虚拟节点 VNode 和旧虚拟节点 oldVNode **进行比对**，然后更新视图；
+   **对两个虚拟节点进行对比是虚拟 DOM 中最核心的算法**，即 patch，**patch 算法**的核心是 diff 算法，它可以判断出哪些节点发生了变化，从而只对发生了变化的节点进行更新操作。
+
+### 既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？？？
+
+[参考文章](https://blog.csdn.net/qq_34629352/article/details/105016428)
+
+1. **通常一个绑定一个数据就需要一个 Watcher**，一但我们的绑定细粒度过高就会产生大量的 Watcher，**这会带来内存以及依赖追踪的开销**。
+2. 而细粒度过低会无法精准侦测变化，**因此 Vue 的设计是选择中等细粒度的方案**；
+   1. 在**组件级别进行 push 侦测的方式**，也就是那套响应式系统，通常我们会第一时间侦测到发生变化的组件；
+   2. 然后在**组件内部进行 Virtual Dom Diff 获取更加具体的差异**，而 **Virtual Dom Diff** 则是 pull 操作,Vue 是 push+pull 结合的方式进行变化侦测的。
+
+### vue 中 key 值的作用
+
+[官方文档](https://cn.vuejs.org/v2/api/#key)
+
+根本就是，**相同的列表元素下，相同的 key，认为是不变的**。
+
+1. key 的特殊属性主要用在 Vue 的虚拟 DOM 算法，在**新旧 nodes 对比时辨识 VNodes**。
+2. 如果不使用 key，Vue 会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。
+3. **使用 key，它会基于 key 的变化重新排列元素顺序，并且会移除 key 不存在的元素**。
+4. 有相同父元素的子元素**必须有独特的 key**。**重复的 key 会造成渲染错误**。
+5. key 的作用主要是为了**高效的更新虚拟 DOM**。
+6. 另外 vue 中在使用相同标签名元素的**过渡切换**时，也会使用到 key 属性，其目的也是为了让 vue 可以区分它们，否则 vue 只会替换其内部属性而不会触发过渡效果。
+
+#### [用 key 管理可复用的元素](https://cn.vuejs.org/v2/guide/conditional.html#%E7%94%A8-key-%E7%AE%A1%E7%90%86%E5%8F%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E5%85%83%E7%B4%A0)
+
+这里主要是用 key 来区别不同的节点，强制重新渲染。
+
+1. Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。
+2. Vue 为你提供了一种方式来表达“这两个元素是完全独立的，不要复用它们”。只需添加一个具有唯一值的 key attribute 即可。
+
+### Vue 的 diff 算法
+
+[参考文章](https://juejin.im/post/5ad6182df265da23906c8627)
+
+vue 和 react 的虚拟 DOM 的 Diff **算法大致相同**，其核心是基于两个简单的假设：
+
+1. 两个相同的组件产生类似的 DOM 结构，不同的组件产生不同的 DOM 结构。
+2. 同一层级的一组节点，他们可以通过唯一的 id 进行区分。
+
+基于以上这两点假设，使得虚拟 DOM 的 Diff 算法的复杂度从 O(n^3)降到了 O(n)。
+
+### vm.\$nextTick( [callback] )
+
+1. 将回调延迟到**下次 DOM 更新循环之后执行**。也就是在更新数据之后，dom 还没有被刷新的时候，后续的操作无法进行，需要等待 dom 更新之后再操作。
+2. 在修改数据之后立即使用它，**然后等待 DOM 更新**。**它跟全局方法 Vue.nextTick 一样**，不同的是回调的 this 自动绑定到调用它的实例上。
+3. 应该会用在，加载 map，可视化图表库的时候用到，更新 dom 节点，拿到之后进行初始化。
+
+```vue
+<template>
+   <transition>
+      <span :key="text" ref="text">{{ text }}</span>
+   </transition>
+</template>
+
+<script>
+public text: string = 'text';
+nextTickHandler($event): void {
+  console.log("$event:", $event);
+  // 修改数据
+  this.text = 'changed';
+  console.log(this.$refs.text);
+  // <span>text</span>
+  debugger
+  // DOM 还没有更新
+  this.$nextTick(function() {
+    // DOM 现在更新了
+    // `this` 绑定到当前实例
+    console.log(this.$refs.text);
+    // <span>changed</span>
+  })
+}
+</script>
+```
