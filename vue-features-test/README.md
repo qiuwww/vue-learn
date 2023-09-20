@@ -1,5 +1,7 @@
 # vue-features-test
 
+这个项目以vue2为基础，示例vue2的相关特性。
+
 ## Project setup
 
 ```
