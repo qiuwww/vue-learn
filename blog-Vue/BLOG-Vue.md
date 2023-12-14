@@ -2,10 +2,10 @@
 title: Vue
 date: 2017-6-6
 tags:
-    - Vue
+  - Vue
 categories:
-    - Vue
-    - 前端框架
+  - Vue
+  - 前端框架
 ---
 
 [TOC]
@@ -32,12 +32,12 @@ Vue (读音 `/vjuː/`，类似于 view) **是一套用于构建用户界面的�
 分别是：
 
 1. M（Model，**模型层** ，也就是数据 data()）；
-    1. 模型层，主要**负责业务数据相关**；`data(){}`
+   1. 模型层，主要**负责业务数据相关**；`data(){}`
 2. V（View，**视图层**， 也就是模板）；
-    1. 视图层，顾名思义，负责视图相关，**细分下来就是 html+css 层**；`template`
-3. VM（ViewModel，V 与 M 连接的桥梁，也可以看作为**控制器**），主要是一堆的Watcher。
-    1. ViewModel 是 Vue.js 的核心，**它是一个 Vue 实例**。Vue 实例是**作用于某一个 HTML 元素上的**，这个元素可以是 HTML 的 body 元素，也可以是指定了 id 的某个元素。
-    2. 负责监听 M 或者 V 的修改，是实现 MVVM 双向绑定的要点；`watch|method|computed|directive等`。
+   1. 视图层，顾名思义，负责视图相关，**细分下来就是 html+css 层**；`template`
+3. VM（ViewModel，V 与 M 连接的桥梁，也可以看作为**控制器**），主要是一堆的 Watcher。
+   1. ViewModel 是 Vue.js 的核心，**它是一个 Vue 实例**。Vue 实例是**作用于某一个 HTML 元素上的**，这个元素可以是 HTML 的 body 元素，也可以是指定了 id 的某个元素。
+   2. 负责监听 M 或者 V 的修改，是实现 MVVM 双向绑定的要点；`watch|method|computed|directive等`。
 
 MVVM 支持**双向绑定**，意思就是当**M 层数据**进行修改时，**VM 层会监测到变化**，并且**通知 V 层进行相应的修改**，反之修改 V 层则会通知 M 层数据进行修改，以此也实现了视图与模型层的**相互解耦**；
 
@@ -48,25 +48,25 @@ MVVM 支持**双向绑定**，意思就是当**M 层数据**进行修改时，**
 ```js
 // 使用get和set
 let obj = {
-    // 设定默认值
-    _data: {
-        a: 123,
-    },
+  // 设定默认值
+  _data: {
+    a: 123,
+  },
 };
 Object.defineProperty(obj, 'a', {
-    get() {
-        // 当获取a时执行
-        console.log('a被获取了');
-        return obj._data.a;
-    },
-    set(value) {
-        // 当修改a时执行
-        obj._data.a = value;
-        console.log('a的值被修改了');
-    },
-    enumerable: true, // 可被遍历得到
-    writable: true, // 可被重新写入
-    configurable: true, // 可被删除，且enumerable和value不能通过Object.defineProperty重新定义
+  get() {
+    // 当获取a时执行
+    console.log('a被获取了');
+    return obj._data.a;
+  },
+  set(value) {
+    // 当修改a时执行
+    obj._data.a = value;
+    console.log('a的值被修改了');
+  },
+  enumerable: true, // 可被遍历得到
+  writable: true, // 可被重新写入
+  configurable: true, // 可被删除，且enumerable和value不能通过Object.defineProperty重新定义
 });
 ```
 
@@ -87,7 +87,7 @@ Object.defineProperty(obj, 'a', {
 3. 独立开发。**开发人员可以专注于业务逻辑和数据的开发（ViewModel）**，设计人员可以专注于页面设计，使用 Expression Blend 可以很容易设计界面并生成 xml 代码。
 4. 可测试。界面素来是比较难于测试的，而现在测试可以针对 ViewModel 来写。
 5. 渐进式，组件化，轻量级，虚拟 dom，响应式，单页面路由，数据与视图分开；
-    1. 渐进式：**通俗点讲就是，你想用啥你就用啥**，咱也不强求你。你想用 component 就用，不用也行，你想用 vuex 就用，不用也可以。
+   1. 渐进式：**通俗点讲就是，你想用啥你就用啥**，咱也不强求你。你想用 component 就用，不用也行，你想用 vuex 就用，不用也可以。
 
 缺点：
 
@@ -104,7 +104,7 @@ Object.defineProperty(obj, 'a', {
 2. Vue 的核心库**只关注视图层**，不仅易于上手，还**便于与第三方库或既有项目整合**。
 3. 可以认为是像`ejs`模版添加了一些内置的方法，**生成的强模版**，便于使用。
 4. Vue 1.0 的官方定位是**视图管理**，Vue 2.0 的官方定位是**渐进式框架**。
-    1. 渐进式代表的含义是：**主张最少**。
+   1. 渐进式代表的含义是：**主张最少**。
 
 ## Vue 核心思想：数据驱动、组件化
 
@@ -143,50 +143,50 @@ data 必须声明为**返回一个初始数据对象的函数**，因为**组件
 总共分为 8 个阶段：
 
 1. 创建前/后：初始化的时候调用
-    1. **beforeCreate**
-        1. vue 实例的挂载元素 el 和数据对象 data 都为 undefined，还未初始化。
-        2. 组件还没有生成，数据观测都还未进行；
-    2. **created**
-        1. 在实例创建完成后被立即调用；
-        2. vue 实例的数据对象 data 有了，el 还没有，**虚拟节点**。
-        3. 实例生成，未挂载；
-        4. 实例已完成以下的配置：**数据观测** (data observer)，属性和方法的运算，watch/event 事件回调。\$el 属性目前不可见。
+   1. **beforeCreate**
+      1. vue 实例的挂载元素 el 和数据对象 data 都为 undefined，还未初始化。
+      2. 组件还没有生成，数据观测都还未进行；
+   2. **created**
+      1. 在实例创建完成后被立即调用；
+      2. vue 实例的数据对象 data 有了，el 还没有，**虚拟节点**。
+      3. 实例生成，未挂载；
+      4. 实例已完成以下的配置：**数据观测** (data observer)，属性和方法的运算，watch/event 事件回调。\$el 属性目前不可见。
 2. 载入前/后：初始化的时候调用
 
-    1. **beforeMount**
-        1. vue 实例的\$el 和 data 都初始化了，**但还是挂载之前为虚拟的 dom 节点**，data.message 还未替换。
-    2. **mounted**
+   1. **beforeMount**
+      1. vue 实例的\$el 和 data 都初始化了，**但还是挂载之前为虚拟的 dom 节点**，data.message 还未替换。
+   2. **mounted**
 
-        1. vue 实例**挂载完成**；
-        2. data.message 成功渲染，**实际 dom 节点**，这个时候可操作 dom。
-        3. 可以在这里进行数据请求；
-        4. 修改 dom，修改 data 都可以进行了；
-        5. mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.\$nextTick 替换掉 mounted。
+      1. vue 实例**挂载完成**；
+      2. data.message 成功渲染，**实际 dom 节点**，这个时候可操作 dom。
+      3. 可以在这里进行数据请求；
+      4. 修改 dom，修改 data 都可以进行了；
+      5. mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.\$nextTick 替换掉 mounted。
 
-        ```js
-        mounted: function () {
-          this.$nextTick(function () {
-            // Code that will run only after the
-            // entire view has been rendered
-          })
-        }
-        ```
+      ```js
+      mounted: function () {
+        this.$nextTick(function () {
+          // Code that will run only after the
+          // entire view has been rendered
+        })
+      }
+      ```
 
 3. 更新前/后：props 及 data 变更的时候调用
-    1. **beforeUpdate**
-        1. 这里适合在更新之前访问现有的 DOM，比如**手动移除已添加的事件监听器**。
-    2. **updated**
-        1. 你应该**避免在此期间更改状态**，如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
-        2. **updated 不会承诺所有的子组件也都一起被重绘**。如果你希望等到整个视图都重绘完毕，可以用 vm.\$nextTick 替换掉 updated。
+   1. **beforeUpdate**
+      1. 这里适合在更新之前访问现有的 DOM，比如**手动移除已添加的事件监听器**。
+   2. **updated**
+      1. 你应该**避免在此期间更改状态**，如果要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
+      2. **updated 不会承诺所有的子组件也都一起被重绘**。如果你希望等到整个视图都重绘完毕，可以用 vm.\$nextTick 替换掉 updated。
 4. 销毁前/后：组件被移出的时候调用，生命周期终结
-    1. **beforeDestroy**
-        1. 实例销毁之前调用。在这一步，**实例仍然完全可用**，实例只是被移出渲染树。
-    2. **destroyed**
-        1. 可以用来种植异步请求，避免出现错误；
-        2. **Vue 实例销毁后调用**。调用后，Vue 实例指示的所有东西都会解绑定，**所有的事件监听器会被移除**，所有的子实例也会被销毁。
+   1. **beforeDestroy**
+      1. 实例销毁之前调用。在这一步，**实例仍然完全可用**，实例只是被移出渲染树。
+   2. **destroyed**
+      1. 可以用来种植异步请求，避免出现错误；
+      2. **Vue 实例销毁后调用**。调用后，Vue 实例指示的所有东西都会解绑定，**所有的事件监听器会被移除**，所有的子实例也会被销毁。
 5. 对于 keep-alive 的组件的激活前/激活后状态
-    1. **activated**，keep-alive 组件激活时调用；
-    2. **deactivated**：keep-alive 组件停用时调用；
+   1. **activated**，keep-alive 组件激活时调用；
+   2. **deactivated**：keep-alive 组件停用时调用；
 6. 错误捕获，**errorCaptured**
 
 ## Vue 区别与原生 js 开发，需要由原来的开发模式迁移过来的习惯
@@ -198,33 +198,33 @@ data 必须声明为**返回一个初始数据对象的函数**，因为**组件
 5. 页面跳转变为路由 vue-router；
 6. 页面数据保存全局或对象中转为状态管理 vuex；
 7. ajax 请求网络交互了。就学习尤大推荐的 axios 了；
-    - vue-source 模块方式；插件性质；
-    - axios 模块；Vue 官方推荐的网络通信库不再是 vue-resource 了，推荐使用 axios；
-    - 自定义 fetch 方法；
+   - vue-source 模块方式；插件性质；
+   - axios 模块；Vue 官方推荐的网络通信库不再是 vue-resource 了，推荐使用 axios；
+   - 自定义 fetch 方法；
 8. 取得元素转为添加 ref 属性；
-    1. ref 被用来给元素或子组件注册引用信息。
-    2. 引用信息将会注册在父组件的 \$refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素; 如果用在子组件上，引用就指向组件实例。
+   1. ref 被用来给元素或子组件注册引用信息。
+   2. 引用信息将会注册在父组件的 \$refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素; 如果用在子组件上，引用就指向组件实例。
 
 ## Vue3.0 新版本的变化
 
 [vue 3.0 proxy 替代 Object.defineProperty 监听](https://blog.csdn.net/gwdgwd123/article/details/89013282)
 
 1. 更小
-    1. 全局 API 和内置组件 / 功能支持 tree-shaking
-    2. 驻的代码尺寸控制在 10kb gzipped 上下
+   1. 全局 API 和内置组件 / 功能支持 tree-shaking
+   2. 驻的代码尺寸控制在 10kb gzipped 上下
 2. 更快
-    1. **基于 Proxy 的变动侦测，性能整体优于 getter / setter**，消除了当前 Vue 2 系列中基于 Object.defineProperty 所存在的一些局限：
-        1. 对属性的添加、删除动作的监测；
-        2. 对数组基于下标的修改、对于 .length 修改的监测；
-        3. 对 Map、Set、WeakMap 和 WeakSet 的支持；
-    2. Virtual DOM 重构
-    3. 编译器架构重构，更多的编译时优化
+   1. **基于 Proxy 的变动侦测，性能整体优于 getter / setter**，消除了当前 Vue 2 系列中基于 Object.defineProperty 所存在的一些局限：
+      1. 对属性的添加、删除动作的监测；
+      2. 对数组基于下标的修改、对于 .length 修改的监测；
+      3. 对 Map、Set、WeakMap 和 WeakSet 的支持；
+   2. Virtual DOM 重构
+   3. 编译器架构重构，更多的编译时优化
 3. 加强 API 设计一致性
 4. 加强 TypeScript 支持
 5. 提高自身可维护性
 6. 代码采用 monorepo 结构，内部分层更清晰
-    1. TypeScript 使得外部贡献者更有信心做改动
-    2. 开放更多底层功能
+   1. TypeScript 使得外部贡献者更有信心做改动
+   2. 开放更多底层功能
 
 ### [Proxy 实例](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
@@ -235,15 +235,15 @@ data 必须声明为**返回一个初始数据对象的函数**，因为**组件
 
 ```js
 let obj = {
-    a: 1,
+  a: 1,
 };
 let proxyObj = new Proxy(obj, {
-    get: function (target, prop) {
-        return prop in target ? target[prop] : 0;
-    },
-    set: function (target, prop, value) {
-        target[prop] = 888;
-    },
+  get: function (target, prop) {
+    return prop in target ? target[prop] : 0;
+  },
+  set: function (target, prop, value) {
+    target[prop] = 888;
+  },
 });
 
 console.log(proxyObj.a); // 1
@@ -275,7 +275,7 @@ Proxy 的问题：
 
 1. Proxy 是 es6 提供的新特性，兼容性不好，最主要的是这个属性无法用 polyfill 来兼容；
 
-### Vue3的生命周期的改变
+### Vue3 的生命周期的改变
 
 ![vue3.0的生命周期](./imgs/vue3.0的生命周期.webp)
 
@@ -421,7 +421,7 @@ export default {
 </script>
 ```
 
-## Vue的虚拟Dom和Diff算法
+## Vue 的虚拟 Dom 和 Diff 算法
 
 [节点、树以及虚拟 DOM](https://cn.vuejs.org/v2/guide/render-function.html#%E8%8A%82%E7%82%B9%E3%80%81%E6%A0%91%E4%BB%A5%E5%8F%8A%E8%99%9A%E6%8B%9F-DOM)
 
@@ -441,8 +441,7 @@ export default {
 其实虚拟 DOM 在 Vue.js 中主要做了两件事：
 
 1. **提供与真实 DOM 节点所对应的虚拟节点 VNode**；
-2. 将虚拟节点 VNode 和旧虚拟节点 oldVNode **进行比对**，然后更新视图；
-   **对两个虚拟节点进行对比是虚拟 DOM 中最核心的算法**，即 patch，**patch 算法**的核心是 diff 算法，它可以判断出哪些节点发生了变化，从而只对发生了变化的节点进行更新操作。
+2. 将虚拟节点 VNode 和旧虚拟节点 oldVNode **进行比对**，然后更新视图； **对两个虚拟节点进行对比是虚拟 DOM 中最核心的算法**，即 patch，**patch 算法**的核心是 diff 算法，它可以判断出哪些节点发生了变化，从而只对发生了变化的节点进行更新操作。
 
 ### 既然 Vue 通过数据劫持可以精准探测数据变化，为什么还需要虚拟 DOM 进行 diff 检测差异？？？
 
@@ -492,9 +491,9 @@ vue 和 react 的虚拟 DOM 的 Diff **算法大致相同**，其核心是基于
 
 ```vue
 <template>
-   <transition>
-      <span :key="text" ref="text">{{ text }}</span>
-   </transition>
+  <transition>
+    <span :key="text" ref="text">{{ text }}</span>
+  </transition>
 </template>
 
 <script>
@@ -516,3 +515,22 @@ nextTickHandler($event): void {
 }
 </script>
 ```
+
+## vue 项目多环境配置
+
+1. 通过命令的`--mode qa`参数来控制加载的配置文件；
+   1. `NODE_ENV`这个变量是给内部控制打包还是本地开发的配置的变量，不能修改，只有`production`、`test`和`development`的区别；
+2. 加载配置文件`.env.qa`，在其中设置变量，需要以`VUE_APP`开头才可以，添加`VUE_APP_ENV=dev`；
+   1. 只有 `NODE_ENV`，`BASE_URL` 和以 `VUE_APP_` 开头的变量将通过 webpack.DefinePlugin 静态地嵌入到客户端侧的代码中。这是为了避免意外公开机器上可能具有相同名称的私钥。
+      1. BASE_URL - 会和 vue.config.js 中的 publicPath 选项相符，即你的应用会部署到的基础路径。
+   2. [dotenv](https://github.com/motdotla/dotenv#rules)；
+3. 然后在项目中可以直接使用`process.env.VUE_APP_ENV`，获取到前面设置的变量值`dev`，然后通过字典`config.js`进行变量输出；
+   1. 这里不写在`.env.qa`文件的好处是，直接修改`config.js`可以不需要手动重启；
+
+### uniapp 项目的两种方式
+
+1. 通过 HbuilderX 编辑器创建，通过 Hbuilderx 进行开发运行发布没有对外暴露配置文件，区分多环境想到的办法只能是手动切换变量去加载不同的 api；
+2. 通过 vue-cli 创建，可以通过切换 mode，切换运行的指令来切换不同的 api；
+   1. 这里也只做基础的区分，还是写到一个文件内进行区分；
+
+### [vue.config.js 的完整配置](https://juejin.cn/post/6886698055685373965)
